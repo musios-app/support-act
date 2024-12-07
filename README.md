@@ -20,13 +20,15 @@ GP Support Act is a configurable AppleScript script to support your Gig Performe
 * Start Gig Performer with your Gig file
 * And most other tasks you need that can be run from the command line
 
+The implementation is intended to be resilient to errors. For example, if an external drive is missing, an audio device is not connected, or a web page is unreachable, then the script will offer you the option to continue or stop. (There are some limits to this that can be addressed in future versions.)
+
 ## Get the script
 
-[1] Get [gp-support-act.applescript](./gp-support-act.applescript) from the GitHub repo.
+[1] Get the latest release of [GP support act](https://github.com/andrewjhunt/gp-support-act/releases) from GitHub in the [GP support act repo](https://github.com/andrewjhunt/gp-support-act
 
-[2] Use the "Download Raw file" button to get the file. (If you're a Github user, you can clone the repo then fork your own version.)
+[2] Download the ZIP file and unzip the contents
 
-[3] Open the file in Apple's "Script Editor" application
+[3] Open `gp-support-act.applescript` in Apple's "Script Editor" application (double click the file)
 
 [4] Configure the script for your environment
 
@@ -185,8 +187,10 @@ openDocument("/Users/musios/Documents/Gig Performer/Gig Files/demo.gig")
 ```
 
 
-## Support
+## Support & Feedback
 
-If you have any questions or need help, please open an issue on the GitHub repo. If you have a feature request, then please open an issue too.
+This is a new project. I'm keen to hear your feedback and suggestions.
+
+The [GitHub issues page for gp-support-act](https://github.com/andrewjhunt/gp-support-act/issues) is the best place questions, suggestions, bugs and requests. 
 
 Alternatively, post a message on the Gig Performer forum. I'm there as "Andrew".
