@@ -43,7 +43,7 @@ openDocument("/Users/musios/Documents/Gig Performer/Gig Files/practice.gig")
 
 ## Get the script
 
-[1] Get the latest release of [GP support act](https://github.com/musios-app/gp-support-act/releases) from GitHub in the [`gp-support-act` repo](https://github.com/musios-app/gp-support-act)
+[1] Get the latest release of [GP support act](https://github.com/musios-app/gp-support-act/releases) from GitHub in the [`gp-support-act`](https://github.com/musios-app/gp-support-act) repository.
 
 [2] Download the ZIP file and unzip the contents
 
