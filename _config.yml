@@ -1,5 +1,6 @@
 theme: jekyll-theme-slate
 layout: default
 
-title: Equal Loudness (musios.app)
-baseurl: /equal-loudness
+baseurl: /gp-support-act
+title: GP Support Act (musios.app)
+description: Utilty to support your GP environment
