@@ -1,12 +1,10 @@
 # GP Support Act
 
 <div style="margin: 10px 0px; padding: 4px 8px; font-weight: bold; color: rgb(114, 28, 36); border: solid 1px rgb(245, 198, 203); background-colour: rgb(248, 215, 218);">
-Important:
-
-* macOS only because it uses AppleScript
-* Early thats needs wider testing
+<p>Important:</p>
+<li>macOS only because it uses AppleScript</li>
+<li>Early version thats needs wider testing</li>
 </div>
-
 
 GP Support Act is a configurable AppleScript script to support your Gig Performer habit. Use it to check that your system is ready for the gig, then start up apps you need for your gig, and finally starts Gig Performer. Things you can do:
 
@@ -24,7 +22,7 @@ The implementation is intended to be resilient to errors. For example, if an ext
 
 ## Get the script
 
-[1] Get the latest release of [GP support act](https://github.com/musios-app/gp-support-act/releases) from GitHub in the [GP support act repo](https://github.com/musios-app/gp-support-act
+[1] Get the latest release of [GP support act](https://github.com/musios-app/gp-support-act/releases) from GitHub in the [`gp-support-act` repo](https://github.com/musios-app/gp-support-act)
 
 [2] Download the ZIP file and unzip the contents
 
@@ -50,7 +48,7 @@ If you're comfortable with AppleScript and shell script, then jump right in. The
 
 AppleScript is written to be readable and you don't need programming experience to configure and use the script. Two things that might help:
 
-1. Text after "--" is a comment
+1. Text after "--" is a comment (that's 2 hyphens)
 2. The `'¬'` character is a 'line continuation' character meaning that the next line continues the current line. I am using it for some arrays with many items. (It is comparable to the backslash in shell scripts and Python.) 
 
 ### Copying file names to the script
@@ -62,7 +60,9 @@ Alternatively, you can Copy the file in Finder then paste into the Script Editor
 
 ## Utility functions
 
-### Check network access - `checkNetAccess(<web address>)`
+### Check network access
+
+`checkNetAccess(<web address>)`
 
 This function checks that the computer has internet access and that specific sites are reachable. You must provide a web address to check. For general checks a site like `www.google.com` is a good choice. If your performance relies on a specific site, then use that.
 
@@ -72,7 +72,9 @@ checkNetAccess("www.musescore.com")
 checkNetAccess("127.0.0.1")
 ```
 
-### Get local copies of cloud files - `cloudDownload(<file-path>)
+### Get local copies of cloud files
+
+`cloudDownload(<file-path>)`
 
 If you use cloud storage like Dropbox, Google Drive, or iCloud, then you may find important have removed from your computer. We need to force a download files to your local drive so your performance isn't slowed.
 
@@ -83,7 +85,9 @@ cloudDownload("/Users/musios/Hey Bulldog - The Beatles")
 ```
 
 
-### Check external disks are connected - `checkFileOrFolderAccessible(<disk-path>)`
+### Check external disks are connected
+
+`checkFileOrFolderAccessible(<disk-path>)`
 
 If any plugin data, sheet music or other content is on an external drive, then you can check that the drive is connected before starting Gig Performer.
 
@@ -94,7 +98,9 @@ checkFileOrFolderAccessible("/Volumes/MusicSSD/Instruments")
 Note: `checkFileOrFolderAccessible` does not force a download of cloud files. For that, use `cloudDownload()`.
 
 
-### Check audio devices are connected - `checkAudioDevice(<device-name>)`
+### Check audio devices are connected
+
+`checkAudioDevice(<device-name>)`
 
 First, to find out the exact names of your audio devices: 
 
@@ -112,7 +118,11 @@ checkAudioDeviceConnected("EVO8")
 
 Note: this check does not distinguish between input and output devices but this doesn't normally matter.
 
-## Check USB & Bluetooth devices are connected - `checkUSBDevice(<device-name>)` & `checkBluetoothDevice(<device-name>)`
+### Check USB & Bluetooth devices are connected
+
+`checkUSBDevice(<device-name>)`
+
+`checkBluetoothDevice(<device-name>)`
 
 First, to find out the exact names of your USB & Bluetooth devices: 
 
@@ -135,8 +145,9 @@ checkUSBDeviceConnected("Stream Deck Plus")
 checkBluetoothDeviceConnected("FS-1-WL")
 ```
 
+### Open web pages in your preferred browser
 
-### Open web pages in your preferred browser - `openWebPage(<browser>, <web-address>)`
+`openWebPage(<browser>, <web-address>)`
 
 The browser can be "Safari", "Google Chrome", "Firefox", etc. Use the full name that appears in your Application list. 
 
@@ -145,7 +156,9 @@ openWebPage(browser, "https://musescore.com/official_scores/scores/6937415")
 openWebPage(browser, "https://tabs.ultimate-guitar.com/tab/royal-blood/figure-it-out-official-2007289")
 ```
 
-### Open a document - `openDocument(<document-path>)`
+### Open a document
+
+`openDocument(<document-path>)`
 
 The `openDocument` function opens a document in the default application that Finder would use. For example, a PDF will open in Preview, a text file in TextEdit, a spreadsheet in Excel and so on. 
 
@@ -162,7 +175,11 @@ openDocument("/Users/musios/Documents/Bome MIDI Translator/Presets/Korg.bmtp")
 Note: `openDocument` does not work with web pages. Also, it does not work with regular expressions to match multiple files. If you need to open multiple files, then use a terminal command (below) to open them all at once.
 
 
-### Run terminal commands - `runTerminalCommand(<command>)` and `itermCommand(<command>)`
+### Run terminal commands
+
+`runTerminalCommand(<command>)`
+
+`itermCommand(<command>)`
 
 The `runTerminalCommand` and `itermCommand` functions each run a command in a terminal window - the first in the MacOS Terminal app and the second in iTerm2 (a popular alternative). 
 
