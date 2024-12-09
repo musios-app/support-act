@@ -210,4 +210,4 @@ This is a new project. I'm keen to hear your feedback and suggestions.
 
 The [GitHub issues page for gp-support-act](https://github.com/musios-app/gp-support-act/issues) is the best place questions, suggestions, bugs and requests. 
 
-Alternatively, post a message on the Gig Performer forum. I'm there as "Andrew".
+Alternatively, post a message on the Gig Performer forum. I'm there as "[Andrew](https://community.gigperformer.com/u/andrew/summary)".
