@@ -24,7 +24,7 @@ The implementation is intended to be resilient to errors. For example, if an ext
 
 ## Get the script
 
-[1] Get the latest release of [GP support act](https://github.com/andrewjhunt/gp-support-act/releases) from GitHub in the [GP support act repo](https://github.com/andrewjhunt/gp-support-act
+[1] Get the latest release of [GP support act](https://github.com/musios-app/gp-support-act/releases) from GitHub in the [GP support act repo](https://github.com/musios-app/gp-support-act
 
 [2] Download the ZIP file and unzip the contents
 
@@ -191,6 +191,6 @@ openDocument("/Users/musios/Documents/Gig Performer/Gig Files/demo.gig")
 
 This is a new project. I'm keen to hear your feedback and suggestions.
 
-The [GitHub issues page for gp-support-act](https://github.com/andrewjhunt/gp-support-act/issues) is the best place questions, suggestions, bugs and requests. 
+The [GitHub issues page for gp-support-act](https://github.com/musios-app/gp-support-act/issues) is the best place questions, suggestions, bugs and requests. 
 
 Alternatively, post a message on the Gig Performer forum. I'm there as "Andrew".

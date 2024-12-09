@@ -4,7 +4,7 @@
 -- 
 -- Author: Andrew Hunt - andrew at musios.app
 -- License: Creative Commons CC0 1.0 Universal
--- Documentation & source: https://github.com/andrewjhunt/gig-support-act
+-- Documentation & source: https://github.com/musios-app/gp-support-act
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 
