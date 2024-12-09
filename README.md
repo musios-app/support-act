@@ -20,6 +20,26 @@ GP Support Act is a configurable AppleScript script to support your Gig Performe
 
 The implementation is intended to be resilient to errors. For example, if an external drive is missing, an audio device is not connected, or a web page is unreachable, then the script will offer you the option to continue or stop. (There are some limits to this that can be addressed in future versions.)
 
+## Example
+
+This script shows some of things that can be done with support act. 
+You can change and add actions to suit your rig and performance needs.
+
+```
+-- Setup for Tuesday night gig
+checkNetAccess("www.musescore.com")
+checkFileOrFolderAccessible("/Volumes/ExternalSSD/Instruments")
+checkAudioDeviceConnected("EVO8")
+checkUSBDeviceConnected("XPIANO73")
+openDocument("/Users/musios/Documents/Bome MIDI Translator/Presets/numa-x-piano73.bmtp")
+openWebPage(browser, "https://musescore.com/official_scores/scores/6937415")
+openDocument("/Users/musios/charts/Let me entertain you - Robbie Williams.pdf")
+openDocument("/Users/musios/Documents/Gig Performer/Gig Files/practice.gig")
+
+-- Utility functions not shown here
+...
+```
+
 ## Get the script
 
 [1] Get the latest release of [GP support act](https://github.com/musios-app/gp-support-act/releases) from GitHub in the [`gp-support-act` repo](https://github.com/musios-app/gp-support-act)
