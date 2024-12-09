@@ -32,7 +32,7 @@ checkFileOrFolderAccessible("/Volumes/ExternalSSD/Instruments")
 checkAudioDeviceConnected("EVO8")
 checkUSBDeviceConnected("XPIANO73")
 openDocument("/Users/musios/Documents/Bome MIDI Translator/Presets/numa-x-piano73.bmtp")
-openWebPage(browser, "https://musescore.com/official_scores/scores/6937415")
+openWebPage("Google Chrome"", "https://musescore.com/official_scores/scores/6937415")
 openDocument("/Users/musios/charts/Let me entertain you - Robbie Williams.pdf")
 openDocument("/Users/musios/Documents/Gig Performer/Gig Files/practice.gig")
 
