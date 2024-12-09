@@ -24,6 +24,7 @@ The implementation is intended to be resilient to errors. For example, if an ext
 
 This script shows some of things that can be done with support act. 
 You can change and add actions to suit your rig and performance needs.
+If there's a problem with your environment (like a missing file or device), then the script will warn you and give the optioin to stop and fix, or continue.
 
 ```
 -- Setup for Tuesday night gig
