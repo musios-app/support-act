@@ -26,7 +26,7 @@ This script shows some of things that can be done with support act.
 You can change and add actions to suit your rig and performance needs.
 If there's a problem with your environment (like a missing file or device), then the script will warn you and give the optioin to stop and fix, or continue.
 
-```
+```applescript
 -- Setup for Tuesday night gig
 checkNetAccess("www.musescore.com")
 checkFileOrFolderAccessible("/Volumes/ExternalSSD/Instruments")
