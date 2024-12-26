@@ -1,3 +1,9 @@
+---
+layout: default
+title: GP Support Act
+description: GP Support Act is a configurable AppleScript script to support your <a href="https://gigperformer.com/">Gig Performer</a> habit. Use it to check that your system is ready for the gig, then start up apps you need for your gig, and finally starts Gig Performer. It can do a long list of checks and actions that get your system ready for GP.
+---
+
 # GP Support Act
 
 <div style="margin: 10px 0px; padding: 4px 8px; font-weight: bold; color: rgb(114, 28, 36); border: solid 1px rgb(245, 198, 203); background-colour: rgb(248, 215, 218);">
