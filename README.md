@@ -18,7 +18,7 @@ NOTE:
 </div>
 
 
-Things GP Support Act can do:
+### Capabilities
 
 <div class="next-list-check"></div>
 
@@ -41,7 +41,7 @@ Things GP Support Act can do:
 
 The implementation is intended to be resilient to errors. For example, if an external drive is missing, an audio device is not connected, or a web page is unreachable, then the script will offer you the option to continue or stop. (There are some limits to this that can be addressed in future versions.)
 
-## Example
+### Example
 
 This script shows some of things that can be done with support act. 
 You can change and add actions to suit your rig and performance needs.
@@ -62,12 +62,20 @@ openDocument("/Users/musios/Documents/Gig Performer/Gig Files/practice.gig")
 ...
 ```
 
-## Start using Support Act
+### Notes on AppleScript syntax
+
+AppleScript is written to be human-readable. You don't need programming experience to modify the script. Two things that might help to know:
+
+1. Text after "--" is a comment (that's 2 hyphens)
+2. The `'¬'` character is a 'line continuation' character meaning that the current line continues on to the next line. I use it for arrays with many items. 
+
+
+## Start using GP Support Act
 
 [GP support act](https://github.com/musios-app/gp-support-act/releases) is maintained in GitHub in the [`gp-support-act`](https://github.com/musios-app/gp-support-act) repository.
 
 1. Download the ZIP file and unzip the contents
-2. Make your copy of `gp-support-act.applescript` 
+2. Make your own copy of `gp-support-act.applescript` 
 3. Open your copy in Apple's "Script Editor" application
 4. Configure the script for your environment (see below)
 5. Run the script
@@ -84,12 +92,6 @@ The utility scripts are the second half of the file. You can modify these if you
 If you're comfortable with AppleScript and shell script, then jump right in. The detail below is intended for users who are new to AppleScript and/or the command line.
 
 
-### Notes on AppleScript syntax
-
-AppleScript is written to be readable and you don't need programming experience to configure and use the script. Two things that might help:
-
-1. Text after "--" is a comment (that's 2 hyphens)
-2. The `'¬'` character is a 'line continuation' character meaning that the next line continues the current line. I am using it for some arrays with many items. (It is comparable to the backslash in shell scripts and Python.) 
 
 ### Copying file names to the script
 
@@ -100,11 +102,9 @@ Alternatively, you can Copy the file in Finder then paste into the Script Editor
 
 ## Utility functions
 
-### Check network access
+### `checkNetAccess(<web address>)`
 
-`checkNetAccess(<web address>)`
-
-This function checks that the computer has internet access and that specific sites are reachable. You must provide a web address to check. For general checks a site like `www.google.com` is a good choice. If your performance relies on a specific site, then use that.
+This function checks that the computer has internet access and that a specific site is reachable. You must provide a web address to check. For general checks a site like `www.google.com` is a good choice. If your performance relies on a specific site, then use that.
 
 ```applescript
 checkNetAccess("www.google.com")
@@ -112,11 +112,11 @@ checkNetAccess("www.musescore.com")
 checkNetAccess("127.0.0.1")
 ```
 
-### Get local copies of cloud files
+### `cloudDownload(<file-path>)`
 
-`cloudDownload(<file-path>)`
+Cloud storage like Dropbox, Google Drive, and iCloud have defauly mode of storing files in the cloud to space on your drive. But for music performance you want as much content stored on your disk as practice to avoid delays.
 
-If you use cloud storage like Dropbox, Google Drive, or iCloud, then you may find important have removed from your computer. We need to force a download files to your local drive so your performance isn't slowed.
+This function need to force a download files to your local drive so your performance isn't slowed.
 
 Depending upon the size of the file or directory, this may take a while. It's recommended that you use the "Keep Local" option in your cloud storage app to keep the files on your computer.
 
@@ -124,12 +124,9 @@ Depending upon the size of the file or directory, this may take a while. It's re
 cloudDownload("/Users/musios/Hey Bulldog - The Beatles")
 ```
 
+### `checkFileOrFolderAccessible(<disk-path>)`
 
-### Check external disks are connected
-
-`checkFileOrFolderAccessible(<disk-path>)`
-
-If any plugin data, sheet music or other content is on an external drive, then you can check that the drive is connected before starting Gig Performer.
+Check that external disks are connected to ensure that plugin data, sheet music and other content is accessible before starting GP.
 
 ```applescript
 checkFileOrFolderAccessible("/Volumes/MusicSSD/Instruments")
@@ -138,88 +135,106 @@ checkFileOrFolderAccessible("/Volumes/MusicSSD/Instruments")
 Note: `checkFileOrFolderAccessible` does not force a download of cloud files. For that, use `cloudDownload()`.
 
 
-### Check audio devices are connected
+### `checkAudioDevice(<device-name>)`
 
-`checkAudioDevice(<device-name>)`
-
-First, to find out the exact names of your audio devices: 
-
-1. Use the `listConnectedAudioDevices()` function in the script
-2. Open the System Information app and navigate to the "Audio" section. The names of the devices are what you need to use in the script.
-3. Use the `system_profiler SPAudioDataType` command in a terminal
-
-Now you can check that your audio devices are connected:
+Check that a specific audio device is connected. 
 
 ```applescript
+checkAudioDeviceConnected("EVO8")
+checkAudioDeviceConnected("FLOW8")
 checkAudioDeviceConnected("MacBook Air Speakers")
 checkAudioDeviceConnected("MacBook Air Microphone")
-checkAudioDeviceConnected("EVO8")
 ```
 
-Note: this check does not distinguish between input and output devices but this doesn't normally matter.
+Note: this check does NOT distinguish between input and output devices (but this doesn't normally matter).
 
-### Check USB & Bluetooth devices are connected
+To find out the exact names of your audio devices try one of these...
 
-`checkUSBDevice(<device-name>)`
+1. Use the `listConnectedAudioDevices()` function in the script,
+2. Or, open the System Information app and navigate to the "Audio" section. The names of the devices are what you need to use in the script.
+3. Or, use the `system_profiler SPAudioDataType` command in a terminal
 
-`checkBluetoothDevice(<device-name>)`
 
-First, to find out the exact names of your USB & Bluetooth devices: 
+### `checkUSBDevice(<device-name>)`
 
-```applescript
-listConnectedUSBDevices()
-listConnectedBluetoothDevices()
-```
-
-Or 
-
-* Open the System Information app and navigate to the "USB" and "Bluetooth" sections.
-* Use the `system_profiler SPUSBDataType` and `system_profiler SPBluetoothDataType` command in a terminal
-
-Now you can check that your devices are connected:
+Check that a USB device is connected by providing the exact name.
 
 ```applescript
 checkUSBDeviceConnected("XPIANO73")
 checkUSBDeviceConnected("Stream Deck Plus")
-
-checkBluetoothDeviceConnected("FS-1-WL")
 ```
 
-### Open web pages in your preferred browser
-
-`openWebPage(<browser>, <web-address>)`
-
-The browser can be "Safari", "Google Chrome", "Firefox", etc. Use the full name that appears in your Application list. 
+To find the exact names of your USB devices:
 
 ```applescript
-openWebPage(browser, "https://musescore.com/official_scores/scores/6937415")
-openWebPage(browser, "https://tabs.ultimate-guitar.com/tab/royal-blood/figure-it-out-official-2007289")
+listConnectedUSBDevices()
 ```
 
-### Open a document
+Or, open the MacOS System Information app and navigate to the "USB" section.
 
-`openDocument(<document-path>)`
+Or, open a terminal and run `system_profiler SPUSBDataType` 
+and `system_profiler SPBluetoothDataType` command in a terminal
 
-The `openDocument` function opens a document in the default application that Finder would use. For example, a PDF will open in Preview, a text file in TextEdit, a spreadsheet in Excel and so on. 
+
+### `checkBluetoothDevice(<device-name>)`
+
+Check that a Bluetooth device is connected by providing the exact name.
+
+```applescript
+checkBluetoothDeviceConnected("FS-1-WL")
+checkBluetoothDeviceConnected("Seaboard Block JU4X")
+```
+
+To find the exact names of your USB devices:
+
+```applescript
+listConnectedBlueoothDevices()
+```
+
+Or, open the MacOS System Information app and navigate to the "Bluetooth" section.
+
+Or, open a terminal and run `system_profiler SPBluetoothDataType` 
+
+
+
+### `openWebPage(<browser>, <web-address>)`
+
+Open a web page in your preferred browser, such as "Safari", "Google Chrome", "Arc", or "Firefox". Use the full name that appears in your Application list. 
+
+```applescript
+openWebPage("Firefox", "https://musescore.com/official_scores/scores/6937415")
+openWebPage("Google Chrome", "https://tabs.ultimate-guitar.com/tab/royal-blood/figure-it-out-official-2007289")
+```
+
+Note: Firefox is preferrable to Chromium-based browsers (Google Chrome, Safari, Arc, Brave...) because of it's lower memory footprint.
+
+
+### `openDocument(<document-path>)`
+
+The `openDocument` function opens a document in the default application that Finder would use. For example, a PDF will typically open in Preview, a text file in TextEdit, a spreadsheet in Excel and so on. 
 
 Files for musical applications also work (if they work in Finder). For example, `.gig` files for Gig Performer, `.mscz` files for MuseScore, `.bmtp` files for BOME MIDI Translator, and many more.
 
 ```applescript
-openDocument("/Users/musios/charts/All Torn Down.pdf")
+openDocument("/Users/musios/charts/I'll forget you.pdf")
 openDocument("/Users/musios/charts/Celebration - Kool & the Gang/Celebration.mscz")
 openDocument("/Users/musios/charts/Song List.xlsx")
 openDocument("/Users/musios/charts/text-doc.txt")
 openDocument("/Users/musios/Documents/Bome MIDI Translator/Presets/Korg.bmtp")
 ```
 
-Note: `openDocument` does not work with web pages. Also, it does not work with regular expressions to match multiple files. If you need to open multiple files, then use a terminal command (below) to open them all at once.
+Notes: 
+
+* Many songs names contain quote characters like single apostrophe. These may cause script issues. If so, consider removing the quotes character from the filename and script
+* `openDocument` does not work with web pages
+* It does not work with regular expressions to match multiple files. If you need to open multiple files, then use a terminal command (below) to open them all at once.
 
 
-### Run terminal commands
 
-`runTerminalCommand(<command>)`
 
-`itermCommand(<command>)`
+### `runTerminalCommand(<command>)`
+
+### `itermCommand(<command>)`
 
 The `runTerminalCommand` and `itermCommand` functions each run a command in a terminal window - the first in the MacOS Terminal app and the second in iTerm2 (a popular alternative). 
 
@@ -230,7 +245,7 @@ runTerminalCommand("echo 'howdy'")
 
 itermCommand("open -a 'Bome MIDI Translator Pro' '/Users/musios/Documents/Bome MIDI Translator/Presets/Casio PX-5S.bmtp'")
 
--- Open all PDF files in a folder
+-- Open a folder full of PDF files in Preview
 itermCommand("open -a Preview /Users/musios/charts/*.pdf")
 ```
 
