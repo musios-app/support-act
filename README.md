@@ -2,25 +2,39 @@
 layout: default
 title: GP Support Act
 description: GP Support Act is a configurable AppleScript script to support your <a href="https://gigperformer.com/">Gig Performer</a> habit. Use it to check that your system is ready for the gig, then start up apps you need for your gig, and finally starts Gig Performer. It can do a long list of checks and actions that get your system ready for GP.
+gitrepo: https://github.com/musios-app/gp-support-act
+tags: gig-performer utility script
 ---
 
 # GP Support Act
 
-<div style="margin: 10px 0px; padding: 4px 8px; font-weight: bold; color: rgb(114, 28, 36); border: solid 1px rgb(245, 198, 203); background-colour: rgb(248, 215, 218);">
-<p>Important:</p>
-<li>macOS only because it uses AppleScript</li>
-<li>Early version thats needs wider testing</li>
+GP Support Act is a configurable AppleScript script to support your Gig Performer habit. Use it to check that your system is ready for the gig, then start up apps you need for your gig, and finally starts Gig Performer. 
+
+<div class="alert alert-warning" role="alert">
+NOTE:
+<li>This utility is for MacOS only because it uses AppleScript</li>
+<li>This version is an early release thats needs wider testing</li>
 </div>
 
-GP Support Act is a configurable AppleScript script to support your Gig Performer habit. Use it to check that your system is ready for the gig, then start up apps you need for your gig, and finally starts Gig Performer. Things you can do:
 
-* Check whether the computer has internet access and that specific sites are reachable
-* Check that an SSD or other external storage is connected
-* Check that your audio devices, MIDI devices, and other USB and bluetooth devices are connected
-* Open chart files
-* Open applications like MuseScore, BOME, etc.
-* Open web pages for lyrics, sheet music, etc.
-* Open documents like playlists, lyrics, etc.
+Things GP Support Act can do:
+
+<div class="next-list-check"></div>
+
+* Check connections:
+  * Internet connections and that specific sites are reachable
+  * External storage
+  * Audio devices
+  * MIDI devices
+  * USB devices
+  * Bluetooth devices
+* Open applications, files and web pages:
+  * Chart files, playlists, lyrics...
+  * MuseScore, Ultimate Guitar, lyrics
+  * BOME and other MIDI Utilities
+  * Web pages for lyrics, sheet music
+  * Documents such as Word, Excel, Notes
+  * Open documents like playlists, lyrics, etc.
 * Start Gig Performer with your Gig file
 * And most other tasks you need that can be run from the command line
 
@@ -33,7 +47,7 @@ You can change and add actions to suit your rig and performance needs.
 If there's a problem with your environment (like a missing file or device), then the script will warn you and give the optioin to stop and fix, or continue.
 
 ```applescript
--- Setup for Tuesday night gig
+-- Setup for Friday night gig
 checkNetAccess("www.musescore.com")
 checkFileOrFolderAccessible("/Volumes/ExternalSSD/Instruments")
 checkAudioDeviceConnected("EVO8")
@@ -47,24 +61,22 @@ openDocument("/Users/musios/Documents/Gig Performer/Gig Files/practice.gig")
 ...
 ```
 
-## Get the script
+## Start using Support Act
 
-[1] Get the latest release of [GP support act](https://github.com/musios-app/gp-support-act/releases) from GitHub in the [`gp-support-act`](https://github.com/musios-app/gp-support-act) repository.
+[GP support act](https://github.com/musios-app/gp-support-act/releases) is maintained in GitHub in the [`gp-support-act`](https://github.com/musios-app/gp-support-act) repository.
 
-[2] Download the ZIP file and unzip the contents
-
-[3] Open `gp-support-act.applescript` in Apple's "Script Editor" application (double click the file)
-
-[4] Configure the script for your environment
-
-[5] Run the script
+1. Download the ZIP file and unzip the contents
+2. Make your copy of `gp-support-act.applescript` 
+3. Open your copy in Apple's "Script Editor" application
+4. Configure the script for your environment (see below)
+5. Run the script
 
 
-### Configure the Script
+### Configuration: your script for your environment
 
 The script is written in AppleScript and is intended to be easy to modify to your environment and needs.
 
-Change the "Configuration" section at the top. There are examples and comments to help you.
+Change the "Configuration" section at the top. There are examples and comments.
 
 The utility scripts are the second half of the file. You can modify these if you need to, but they are intended to be general-purpose.
 
