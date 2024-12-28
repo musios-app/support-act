@@ -104,9 +104,37 @@ Alternatively, you can Copy the file in Finder then paste into the Script Editor
 
 ## Utility functions
 
-### `setLightMode(); setDarkMode()`
+### `initialize()`
+
+Always initialize at the start of the script. This sets up some of the utilities.
+
+```applescript
+initialize()
+```
+
+
+### `progress_start(numSteps, description, descript_add)`
+
+Sets up the progress bar which appears at the bottom of the Script Editor.
+Each utility automatically updates the progress bar during execution.
+
+Note: the number of steps doesn't need to be exact (unless you really care!).
+
+Example: 
+
+```applescript
+progress_start(30, "GP Support Act", "Getting ready to perform!")
+```
+
+
+### `setLightMode() / setDarkMode()`
 
 Switch your desktop to light or dark mode.
+
+```applescript
+setDarkMode()
+setLightMode()
+```
 
 
 ### `checkNetAccess(<web address>)`
@@ -202,6 +230,18 @@ Or, open the MacOS System Information app and navigate to the "Bluetooth" sectio
 
 Or, open a terminal and run `system_profiler SPBluetoothDataType` 
 
+### `disableBluetooth() / enableBluetooth()`
+
+Enable or disable Bluetooth.
+
+<div class="alert alert-warning" role="alert">
+CAUTION: if you are using Bluetooth mouse and keyboard, then make sure you have a method to re-enable Bluetooth. The built-in mouse and keyboard are fine for a Macbook.  For Mac Mini and iMac, keep a cable handy to connect the mouse and keyboard directly to your Mac.
+</div>
+
+```applescript
+disableBluetooth()
+enableBluetooth()
+```
 
 
 ### `openWebPage(<browser>, <web-address>)`

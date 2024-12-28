@@ -19,9 +19,14 @@ initialize()
 -- This sample script has 30 tasks, but you can adjust this as needed
 progress_start(30, "GP Support Act", "Getting ready to perform!")
 
+
 -- Light or dark mode for on-stage performance?
 setDarkMode()
 --setLightMode()
+
+-- Siri can disrupt or slow performance, so disable it
+disableSiri()
+--enableSiri()
 
 -- Check we have internet access (only if needed)
 checkNetAccess("www.google.com")
@@ -54,6 +59,11 @@ checkUSBDeviceConnected("Stream Deck Plus")
 -- Check that required Bluetooth devices are connected
 checkBluetoothDeviceConnected("FS-1-WL")
 checkBluetoothDeviceConnected("Seaboard Block JU4X")
+
+-- Disable or enable Bluetooth
+-- CAUTION: make sure you have a way to re-enable Bluetooth if you disable it!
+disableBluetooth()
+enableBluetooth()
 
 -- Open web pages in your preferred browser
 -- The browser name must be its exact Application name (without the .app extension)
@@ -143,6 +153,29 @@ on setLightMode()
     end tell
   end tell
 end setLightMode
+
+
+-- Enable or disable Siri
+on disableSiri()
+	progress_next("Disabling Siri")
+	
+	set shellScript to "defaults write com.apple.assistant.support \"Assistant Enabled\" -bool false"
+	do shell script shellScript
+	
+	set shellScript to "defaults write com.apple.Siri StatusMenuVisible -bool false"
+	do shell script shellScript
+end disableSiri
+
+on enableSiri()
+	progress_next("Enabling Siri")
+	
+	set shellScript to "defaults write com.apple.assistant.support \"Assistant Enabled\" -bool true"
+	do shell script shellScript
+	
+	set shellScript to "defaults write com.apple.Siri StatusMenuVisible -bool true"
+	do shell script shellScript
+end enableSiri
+
 
 
 -- Force the download of files in a path by recursively processing the contents (which forces the download)
@@ -246,6 +279,28 @@ on checkBluetoothDeviceConnected(deviceName)
 
   check_system_profiler("Bluetooth device", "SPBluetoothDataType", deviceName)
 end checkBluetoothDeviceConnected
+
+
+-- Enable or disable Bluetooth
+-- CAUTION: make sure you have a way to re-enable Bluetooth if you disable it!
+on disableBluetooth()
+	progress_next("Disabling Bluetooth")
+	
+  display dialog ("Are you sure you want to disable Bluetooth?") buttons {"Continue", "Cancel"} default button "Cancel" with title "WARNING"
+
+	set shellScript to "sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0 && 
+            sudo pkill bluetoothd && exit"
+	itermCommand(shellScript)
+end disableBluetooth
+
+on enableBluetooth()
+	progress_next("Enabling Bluetooth")
+	
+	set shellScript to "sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 1 && 
+            sudo killall -HUP bluetoothd"
+	itermCommand(shellScript)
+end enableBluetooth
+
 
 
 -- Open a web page in a browser
