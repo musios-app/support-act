@@ -15,6 +15,10 @@
 -- Always initialize first
 initialize()
 
+-- Maintain a progress bar. It needs a rough number of tasks to be done
+-- This sample script has 30 tasks, but you can adjust this as needed
+progress_start(30, "GP Support Act", "Getting ready to perform!")
+
 -- Light or dark mode for on-stage performance?
 setDarkMode()
 --setLightMode()
@@ -39,10 +43,9 @@ listConnectedUSBDevices()
 listConnectedBluetoothDevices()
 
 -- Check that required audio devices are connected
-checkAudioDeviceConnected("EVO8")
+checkAudioDeviceConnected("XPIANO73")
 checkAudioDeviceConnected("FLOW8")
-checkAudioDeviceConnected("MacBook Air Speakers")
-checkAudioDeviceConnected("MacBook Air Microphone")
+checkAudioDeviceConnected("Mac mini Speakers")
 
 -- Check that required USB devices are connected
 checkUSBDeviceConnected("XPIANO73")
@@ -79,13 +82,51 @@ openDocument("/Users/musios/Documents/Gig Performer/Gig Files/demo.gig")
 --    You probably won't need to change below here
 ---------------------------------------------------------------------------------
 
-global gpWindow
+global gpWindow, numTasks, taskNum
+set gpWindow to missing value
+set numTasks to missing value
+set taskNum to missing value
+
 
 on initialize()
   set gpWindow to missing value
 end initialize
 
+
+-- Basic progress bar functions
+on progress_start(numSteps, description, descript_add)
+  set numTasks to numSteps
+  set taskNum to 0
+
+  set progress total steps to numSteps
+  set progress completed steps to taskNum
+  set progress description to description
+  set progress additional description to descript_add
+end progress_start
+
+on progress_next(message)
+  set taskNum to taskNum + 1
+  if taskNum > numTasks then
+    set numTasks to numTasks + 1
+  end if
+
+  set progress additional description to message & " (" & taskNum & " of " & numTasks & ")"
+
+  delay 0.1
+end progress_next
+
+on progress_end()
+  set progress total steps to 0
+  set progress completed steps to 0
+  set progress description to ""
+  set progress additional description to ""
+end progress_end
+
+
+-- Select dark or light mode
 on setDarkMode()
+	progress_next("Setting dark mode")
+
   tell application "System Events"
     tell appearance preferences
       set dark mode to true
@@ -94,6 +135,8 @@ on setDarkMode()
 end setDarkMode
 
 on setLightMode()
+	progress_next("Setting light mode")
+
   tell application "System Events"
     tell appearance preferences
       set dark mode to false
@@ -105,14 +148,22 @@ end setLightMode
 -- Force the download of files in a path by recursively processing the contents (which forces the download)
 -- This call can be slow due to the download process and possibly the time to count the files
 on cloudDownload(path)
+	progress_next("Ensure a local copy of: " & path)
+
   set shellScript to "find '" & path & "' -type f -exec wc {} \\;"
-  -- display dialog shellScript buttons {"OK"} default button 1
-  set report to do shell script shellScript
+
+  try
+    set report to do shell script shellScript
+  on error errMsg number errNum
+    display dialog ("Error: " & errMsg & " (Error number: " & errNum & ")") buttons {"Continue", "Cancel"} default button "Cancel" with title "WARNING"
+  end try
 end cloudDownload
 
 
 -- Check network access to a site with netcat
 on checkNetAccess(site)
+	progress_next("Checking network access to " & site)
+
   set shellScript to "TEMP=$(nc -z -G 5 " & site & " 80 2>&1); echo $TEMP"
   set report to do shell script shellScript
 
@@ -124,6 +175,8 @@ end checkNetAccess
 
 -- Check if a file or folder is accessible
 on checkFileOrFolderAccessible(path)
+	progress_next("Checking access to file: " & path)
+
   tell application "System Events"
     if (exists disk item path) then
       log "  Required file/folder: " & path & " OK"
@@ -137,16 +190,22 @@ end checkFileOrFolderAccessible
 
 -- List connected devices: audio, USB and Bluetooth
 on listConnectedAudioDevices()
+	progress_next("Listing connected audio devices")
+
   set shellScript to "TEMP=\"$(mktemp -d)/audio-devices.txt\"; system_profiler -detailLevel basic SPAudioDataType > $TEMP; open -a TextEdit $TEMP"
   do shell script shellScript
 end listConnectedAudioDevices
 
 on listConnectedUSBDevices()
+	progress_next("Listing connected USB devices")
+
   set shellScript to "TEMP=\"$(mktemp -d)/usb-devices.txt\"; system_profiler -detailLevel basic SPUSBDataType > $TEMP; open -a TextEdit $TEMP"
   do shell script shellScript
 end listConnectedUSBDevices
 
 on listConnectedBluetoothDevices()
+	progress_next("Listing connected Bluetooth devices")
+
   set shellScript to "TEMP=\"$(mktemp -d)/bluetooth-devices.txt\"; system_profiler -detailLevel basic SPBluetoothDataType > $TEMP; open -a TextEdit $TEMP"
   do shell script shellScript
 end listConnectedBluetoothDevices
@@ -154,6 +213,8 @@ end listConnectedBluetoothDevices
 
 -- Utility wrapper around system_profiler
 on check_system_profiler(dataTypeText, dataType, deviceName)
+	set shellScript to "system_profiler -detailLevel full " & dataType
+
   set shellScript to "system_profiler -detailLevel full " & dataType
   set report to do shell script shellScript
 
@@ -166,21 +227,31 @@ on check_system_profiler(dataTypeText, dataType, deviceName)
   end if
 end check_system_profiler
 
+
+-- Use system_profiler to list attached devices
 on checkAudioDeviceConnected(deviceName)
+	progress_next("Checking for connected audio device: " & deviceName)
+
   check_system_profiler("Audio device", "SPAudioDataType", deviceName)
 end checkAudioDeviceConnected
 
 on checkUSBDeviceConnected(deviceName)
+	progress_next("Checking for connected USB device: " & deviceName)
+
   check_system_profiler("USB device", "SPUSBDataType", deviceName)
 end checkUSBDeviceConnected
 
 on checkBluetoothDeviceConnected(deviceName)
+	progress_next("Checking for connected Bluetooth device: " & deviceName)
+
   check_system_profiler("Bluetooth device", "SPBluetoothDataType", deviceName)
 end checkBluetoothDeviceConnected
 
 
 -- Open a web page in a browser
 on openWebPage(browser, page)
+	progress_next("Opening page in " & browser & ": " & page)
+
   tell application browser
     open location page
     activate
@@ -190,6 +261,8 @@ end openWebPage
 
 -- Open a document in its default application
 on openDocument(docPath)
+	progress_next("Opening document: " & docPath)
+
   set targetPath to POSIX file docPath as alias
   tell application "Finder" to open targetPath
 end openDocument
@@ -197,6 +270,8 @@ end openDocument
 
 -- Run a command in iTerm2
 on itermCommand(cmd)
+	progress_next("Running command in iTerm: " & cmd)
+
   tell application "iTerm"
     activate
 
@@ -221,6 +296,8 @@ end itermCommand
 
 -- Run a command in Terminal app
 on runTerminalCommand(cmd)
+	progress_next("Running command in Terminal: " & cmd)
+
   tell application "Terminal"
     do script cmd
     activate
