@@ -12,7 +12,7 @@ image: assets/images/gig-performer-icon-512x512.jpg
 GP Support Act is a configurable AppleScript script to support your Gig Performer habit. Use it to check that your system is ready for the gig, then start up apps you need for your gig, and finally starts Gig Performer. 
 
 <div class="alert alert-warning" role="alert">
-NOTE:
+<b>Notes</b>
 <li>This utility is for MacOS only because it uses AppleScript</li>
 <li>This version is an early release thats needs wider testing</li>
 </div>
@@ -22,14 +22,14 @@ NOTE:
 
 <div class="next-list-check"></div>
 
-* Check connections:
+* Check connections
   * Internet connections and that specific sites are reachable
   * External storage
   * Audio devices
   * MIDI devices
   * USB devices
   * Bluetooth devices
-* Open applications, files and web pages:
+* Open applications, files and web pages
   * Chart files, playlists, lyrics...
   * MuseScore, Ultimate Guitar, lyrics
   * BOME and other MIDI Utilities
@@ -43,7 +43,7 @@ NOTE:
 
 The implementation is intended to be resilient to errors. For example, if an external drive is missing, an audio device is not connected, or a web page is unreachable, then the script will offer you the option to continue or stop. (There are some limits to this that can be addressed in future versions.)
 
-### Example
+### Sample Configuration
 
 This script shows some of things that can be done with support act. 
 You can change and add actions to suit your rig and performance needs.
@@ -62,15 +62,6 @@ openDocument("/Users/musios/Documents/Gig Performer/Gig Files/practice.gig")
 
 -- Utility functions not shown here
 ...
-```
-
-### Script
-
-{% include_relative gp-support-act.applescript %}
-
-
-```applescript
-{% include_relative gp-support-act.applescript %}
 ```
 
 ### Notes on AppleScript syntax
@@ -282,3 +273,42 @@ This is a new project. I'm keen to hear your feedback and suggestions.
 The [GitHub issues page for gp-support-act](https://github.com/musios-app/gp-support-act/issues) is the best place questions, suggestions, bugs and requests. 
 
 Alternatively, post a message on the Gig Performer forum. I'm there as "[Andrew](https://community.gigperformer.com/u/andrew/summary)".
+
+
+
+### GP Support Act - the script
+
+```applescript
+{% include_relative gp-support-act.applescript %}
+```
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const preElements = document.querySelectorAll('.rouge-table .rouge-code pre');
+    preElements.forEach((pre, index) => {
+      const rougeCode = pre.closest(".rouge-code")
+      const button = document.createElement('button');
+      button.className = 'rouge-code-copy-button';
+      button.innerHTML = '<i class="fa-regular fa-copy"></i>'
+
+      button.addEventListener('click', () => {
+          const code = pre.innerText;
+          navigator.clipboard.writeText(code).then(() => {
+              button.classList.add('success');
+              setTimeout(() => {
+                button.classList.remove('success');
+              }, 250)
+          }).catch(err => {
+              console.error('Failed to copy: ', err);
+          });
+      });
+
+      pre.parentNode.insertBefore(button, pre.nextSibling);
+    });
+  });
+
+</script>
+
+
+
