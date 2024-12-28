@@ -36,6 +36,8 @@ NOTE:
   * Web pages for lyrics, sheet music
   * Documents such as Word, Excel, Notes
   * Open documents like playlists, lyrics, etc.
+* Other environment setup
+  * Switch to light or dark mode
 * Start Gig Performer with your Gig file
 * And most other tasks you need that can be run from the command line
 
@@ -60,6 +62,15 @@ openDocument("/Users/musios/Documents/Gig Performer/Gig Files/practice.gig")
 
 -- Utility functions not shown here
 ...
+```
+
+### Script
+
+{% include_relative gp-support-act.applescript %}
+
+
+```applescript
+{% include_relative gp-support-act.applescript %}
 ```
 
 ### Notes on AppleScript syntax
@@ -101,6 +112,11 @@ Alternatively, you can Copy the file in Finder then paste into the Script Editor
 
 
 ## Utility functions
+
+### `setLightMode(); setDarkMode()`
+
+Switch your desktop to light or dark mode.
+
 
 ### `checkNetAccess(<web address>)`
 

@@ -20,6 +20,13 @@ set gpWindow to missing value
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 
+--------------------
+-- Dark mode for on-stage performance
+--------------------
+
+setDarkMode()
+--setLightMode()
+
 
 --------------------
 -- Check we have net access
@@ -119,6 +126,24 @@ openDocument("/Users/musios/Documents/Gig Performer/Gig Files/demo.gig")
 --    You probably won't need to change below here
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
+
+
+on setDarkMode()
+	tell application "System Events"
+		tell appearance preferences
+			set dark mode to true
+		end tell
+	end tell
+end setDarkMode
+
+on setLightMode()
+	tell application "System Events"
+		tell appearance preferences
+			set dark mode to false
+		end tell
+	end tell
+end setLightMode
+
 
 on listConnectedAudioDevices()
 	set shellScript to "TEMP=\"$(mktemp -d)/audio-devices.txt\"; system_profiler -detailLevel basic SPAudioDataType > $TEMP; open -a TextEdit $TEMP"
