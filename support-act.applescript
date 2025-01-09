@@ -23,7 +23,6 @@ on setLightMode()
 end setLightMode
 
 
-
 on setSoundDevice(type, deviceName)
 	set types to {"alert", "input", "output"}
 	if not (types contains type) then
@@ -34,13 +33,15 @@ on setSoundDevice(type, deviceName)
 	if type is "alert" then set type to "system"
 	
 	try
-		set soundScript to "/opt/homebrew/bin/SwitchAudioSource -t " & type & " -s \"" & deviceName & "\""
+		set soundScript to "/opt/homebrew/bin/SwitchAudioSourcex -t " & type & " -s \"" & deviceName & "\""
 		do shell script soundScript
 	on error errMsg
-		display dialog "Error: " & errMsg buttons {"OK"} default button "OK"
-		set dialogText to "Cannot set sound device" & return & "SwitchAudioSource is not installed" & return & "[" & type & ": " & deviceName & "]"
-		display dialog dialogText buttons {"Continue", "Cancel"} default button "Cancel" with title "WARNING"
-		
+		if (offset of "No such file or directory" in errMsg) > 0 then
+			set dialogText to "Unable to set sound device.  SwitchAudioSource is required. Visit: https://github.com/deweller/switchaudio-osx"
+			display dialog dialogText buttons {"Continue", "Cancel"} default button "Cancel" with title "WARNING"
+		else
+			display dialog "Error: " & errMsg buttons {"OK"} default button "OK"
+		end if	
 	end try
 end setSoundDevice
 
@@ -58,7 +59,6 @@ on setVolume(type, volumeLevel)
 end setVolume
 
 
-
 on listConnectedAudioDevices()
 	set shellScript to "TEMP=\"$(mktemp -d)/audio-devices.txt\"; system_profiler -detailLevel basic SPAudioDataType > $TEMP; open -a TextEdit $TEMP"
 	do shell script shellScript
@@ -73,12 +73,6 @@ on listConnectedBluetoothDevices()
 	set shellScript to "TEMP=\"$(mktemp -d)/bluetooth-devices.txt\"; system_profiler -detailLevel basic SPBluetoothDataType > $TEMP; open -a TextEdit $TEMP"
 	do shell script shellScript
 end listConnectedBluetoothDevices
-
-
-on setSystemAudioInput(device)
-	SwitchAudioSource -s device
-	osascript -e "output volume of (get volume settings)"
-end setSystemAudioInput
 
 
 -- Force the download of files in a path by recursively processing the contents (which forces the download)
@@ -156,12 +150,13 @@ end openDocument
 
 
 on itermCommand(cmd)
-	display dialog ("about to iterm") buttons {"Continue", "Cancel"} default button "Cancel" with title "WARNING"
-
-	tell application "iTerm"
-		activate
-		do script cmd
-	end tell
+    tell application "iTerm"
+        activate
+        set newWindow to (create window with default profile)
+        tell current session of newWindow
+            write text cmd
+        end tell
+    end tell
 end itermCommand
 
 on runTerminalCommand(cmd)
