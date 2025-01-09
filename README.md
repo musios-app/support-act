@@ -150,6 +150,8 @@ setSoundDevice("alert", "Mac mini Speakers")
 
 Set the volume of a sound device. The `type` must be one of `"input"`, `"output"` or `"alert"`. These correspond to the 3 devices in Mac's Sound Settings.  "Alert" is for beeps for mail, social media, system errors and all the other noise you don't want through front-of-house.
 
+The `volumeLevel` must be an integer from 0-100 which is `-Inf DB` to `0dB`. For values in between, open Apple's "Audio MIDI Setup" application. Open the "Audio Devices" window. This shows the mapping from the integer volume level to dB level.  (For example, `50` is equivalent to `-6dB`)
+
 ```applescript
 setVolume("input", 50)
 setVolume("output", 90)
