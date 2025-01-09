@@ -1,132 +1,25 @@
 ---------------------------------------------------------------------------------
----------------------------------------------------------------------------------
 -- Configurable utility script that prepares for and starts up Gig Performer
 -- 
 -- Author: Andrew Hunt - andrew at musios.app
 -- License: Creative Commons CC0 1.0 Universal
 -- Documentation & source: https://github.com/musios-app/gp-support-act
 ---------------------------------------------------------------------------------
+
 ---------------------------------------------------------------------------------
+--    Supporting functions
+--    You probably won't need to change this file
+---------------------------------------------------------------------------------
+
+display dialog ("INCLUDED") buttons {"Continue", "Cancel"} default button "Cancel" with title "WARNING"
 
 -- Leave this as-is
 global gpWindow
 set gpWindow to missing value
--- 
 
-
----------------------------------------------------------------------------------
----------------------------------------------------------------------------------
---    Configuration - use the utility functions to prep for GP
----------------------------------------------------------------------------------
----------------------------------------------------------------------------------
-
---------------------
--- Dark mode for on-stage performance
---------------------
-
-setDarkMode()
---setLightMode()
-
-
---------------------
--- Check we have net access
---------------------
-
-checkNetAccess("www.google.com")
-checkNetAccess("www.musescore.com")
-
-
---------------------
--- Download folders & files that may be in cloud storage
---------------------
-
-cloudDownload("/Users/musios/Hey Bulldog - The Beatles")
-
---------------------
--- Check for required folders and files
---------------------
-
-checkFileOrFolderAccessible("/Volumes/MusicSSD/Instruments")
-checkFileOrFolderAccessible("/Volumes/MusicSSD/Instruments/Native Instruments")
-checkFileOrFolderAccessible("/Volumes/MusicSSD/Instruments/ROLI")
-checkFileOrFolderAccessible("/Volumes/MusicSSD/Instruments/Spitfire/Spitfire Audio - BBC Symphony Orchestra")
-
-
---------------------
--- Check that required audio devices are connected.
+log "gpWindow:"
+log gpWindow
 --
--- listConnectedAudioDevices() provides the current audio connections 
---------------------
-
--- listConnectedAudioDevices()
-
-checkAudioDeviceConnected("MacBook Air Speakers")
-checkAudioDeviceConnected("MacBook Air Microphone")
-checkAudioDeviceConnected("EVO8")
-
-
---------------------
--- Check that required USB & Bluetooth devices are connected.
---
--- listConnectedUSBDevices() & listConnectedBluetoothDevices()
--- provide the current current connection lists
---------------------
-
--- listConnectedUSBDevices()
--- listConnectedBluetoothDevices()
-
-checkUSBDeviceConnected("XPIANO73")
-checkUSBDeviceConnected("Stream Deck Plus")
-
-checkBluetoothDeviceConnected("FS-1-WL")
-
-
---------------------
--- Open web pages in your preferred browser
---------------------
-
--- set browser to "Safari"
-set browser to "Google Chrome"
-
-openWebPage(browser, "https://musescore.com/official_scores/scores/6937415")
-openWebPage(browser, "https://tabs.ultimate-guitar.com/tab/royal-blood/figure-it-out-official-2007289")
-
-
---------------------
--- Open document(s)
---------------------
-
-openDocument("/Users/musios/charts/All Torn Down.pdf")
-openDocument("/Users/musios/charts/Celebration - Kool & the Gang/Celebration.mscz")
-openDocument("/Users/musios/charts/Song List.xlsx")
-openDocument("/Users/musios/charts/text-doc.txt")
-openDocument("/Users/musios/Documents/Bome MIDI Translator/Presets/Korg.bmtp")
-
-
---------------------
--- Run shell scripts in Terminal or iTerm2
---------------------
-
-runTerminalCommand("echo 'howdy'")
-
-itermCommand("open -a 'Bome MIDI Translator Pro' '/Users/musios/Documents/Bome MIDI Translator/Presets/Casio PX-5S.bmtp'")
-itermCommand("open -a Preview /Users/musios/charts/*.pdf")
-
-
---------------------
--- Finally, let's get Gig Performer started!
---------------------
-
-openDocument("/Users/musios/Documents/Gig Performer/Gig Files/demo.gig")
-
-
----------------------------------------------------------------------------------
----------------------------------------------------------------------------------
---    Supporting functions
---    You probably won't need to change below here
----------------------------------------------------------------------------------
----------------------------------------------------------------------------------
-
 
 on setDarkMode()
 	tell application "System Events"
