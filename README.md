@@ -1,18 +1,18 @@
 ---
 layout: default
-title: GP Support Act
-description: GP Support Act is a configurable AppleScript script to support your <a href="https://gigperformer.com/">Gig Performer</a> habit. Use it to check that your system is ready for the gig, then start up apps you need for your gig, and finally starts Gig Performer. It can do a long list of checks and actions that get your system ready for GP.
+title: Support Act
+description: Support Act is a configurable AppleScript script to support your <a href="https://gigperformer.com/">Gig Performer</a> habit. Use it to check that your system is ready for the gig, then start up apps you need for your gig, and finally starts Gig Performer. It can do a long list of checks and actions that get your system ready for GP. Oh, you can also make another script to restore your settings after the gig too.
 gitrepo: https://github.com/musios-app/gp-support-act
 tags: gig-performer utility script
 image: assets/images/gig-performer-icon-512x512.jpg
 ---
 
-# GP Support Act
+# Support Act
 
-GP Support Act is a configurable AppleScript script to support your Gig Performer habit. Use it to check that your system is ready for the gig, then start up apps you need for your gig, and finally starts Gig Performer. 
+Support Act is a configurable AppleScript script to set up your Mac for a performance. Use it to check that your system is ready for the gig, then start up apps you need for your gig, and finally starts Gig Performer (or your preferred live software). You can also make another script to restore your settings after the gig too.
 
 <div class="alert alert-warning" role="alert">
-<b>Notes</b>
+NOTE:
 <li>This utility is for MacOS only because it uses AppleScript</li>
 <li>This version is an early release thats needs wider testing</li>
 </div>
@@ -22,14 +22,14 @@ GP Support Act is a configurable AppleScript script to support your Gig Performe
 
 <div class="next-list-check"></div>
 
-* Check connections
+* Check connections:
   * Internet connections and that specific sites are reachable
   * External storage
   * Audio devices
   * MIDI devices
   * USB devices
   * Bluetooth devices
-* Open applications, files and web pages
+* Open applications, files and web pages:
   * Chart files, playlists, lyrics...
   * MuseScore, Ultimate Guitar, lyrics
   * BOME and other MIDI Utilities
@@ -43,25 +43,30 @@ GP Support Act is a configurable AppleScript script to support your Gig Performe
 
 The implementation is intended to be resilient to errors. For example, if an external drive is missing, an audio device is not connected, or a web page is unreachable, then the script will offer you the option to continue or stop. (There are some limits to this that can be addressed in future versions.)
 
-### Sample Configuration
+### Example
 
 This script shows some of things that can be done with support act. 
 You can change and add actions to suit your rig and performance needs.
 If there's a problem with your environment (like a missing file or device), then the script will warn you and give the optioin to stop and fix, or continue.
 
 ```applescript
--- Setup for Friday night gig
-checkNetAccess("www.musescore.com")
-checkFileOrFolderAccessible("/Volumes/ExternalSSD/Instruments")
-checkAudioDeviceConnected("EVO8")
-checkUSBDeviceConnected("XPIANO73")
-openDocument("/Users/musios/Documents/Bome MIDI Translator/Presets/numa-x-piano73.bmtp")
-openWebPage("Google Chrome", "https://musescore.com/official_scores/scores/6937415")
-openDocument("/Users/musios/charts/Let me entertain you - Robbie Williams.pdf")
-openDocument("/Users/musios/Documents/Gig Performer/Gig Files/practice.gig")
+-- Leave this mumbo-jumbo unchanged. It loads the utilities
+set prepareScript to "cd \"$HOME/Library/Script Libraries\"; osacompile -o support-act.scpt support-act.applescript"
+do shell script prepareScript
+-- End of mumbo-jumbo
 
--- Utility functions not shown here
-...
+tell script "gp-support-act"
+  -- Setup for Friday night gig
+  setDarkMode()
+  checkNetAccess("www.musescore.com")
+  checkFileOrFolderAccessible("/Volumes/ExternalSSD/Instruments")
+  checkAudioDeviceConnected("EVO8")
+  checkUSBDeviceConnected("XPIANO73")
+  openDocument("/Users/musios/Documents/Bome MIDI Translator/Presets/numa-x-piano73.bmtp")
+  openWebPage("Google Chrome", "https://musescore.com/official_scores/scores/6937415")
+  openDocument("/Users/musios/charts/Let me entertain you - Robbie Williams.pdf")
+  openDocument("/Users/musios/Documents/Gig Performer/Gig Files/practice.gig")
+end tell
 ```
 
 ### Notes on AppleScript syntax
@@ -77,10 +82,15 @@ AppleScript is written to be human-readable. You don't need programming experien
 [GP support act](https://github.com/musios-app/gp-support-act/releases) is maintained in GitHub in the [`gp-support-act`](https://github.com/musios-app/gp-support-act) repository.
 
 1. Download the ZIP file and unzip the contents
-2. Make your own copy of `gp-support-act.applescript` 
-3. Open your copy in Apple's "Script Editor" application
-4. Configure the script for your environment (see below)
-5. Run the script
+2. In Finder, copy the file `support-act.applescript`
+3. Also in Finder, use the "Go -> Go to folder..."
+4. Enter "~/Library" then hit Return
+5. Right-click (or Ctrl-click) on "Script Libraries" then "Services > New Terminal in Folder". 
+6. (Before using the terminal) open the "Script Libraries" (double-click)
+7. Paste the file (`support-act.applescript` from above)
+8. In the terminal, run this command `osacompile -o support-act.scpt support-act.applescript`
+9. Check that there is now a file `support-act.scpt`
+
 
 
 ### Configuration: your script for your environment
@@ -104,37 +114,9 @@ Alternatively, you can Copy the file in Finder then paste into the Script Editor
 
 ## Utility functions
 
-### `initialize()`
-
-Always initialize at the start of the script. This sets up some of the utilities.
-
-```applescript
-initialize()
-```
-
-
-### `progress_start(numSteps, description, descript_add)`
-
-Sets up the progress bar which appears at the bottom of the Script Editor.
-Each utility automatically updates the progress bar during execution.
-
-Note: the number of steps doesn't need to be exact (unless you really care!).
-
-Example: 
-
-```applescript
-progress_start(30, "GP Support Act", "Getting ready to perform!")
-```
-
-
-### `setLightMode() / setDarkMode()`
+### `setLightMode(); setDarkMode()`
 
 Switch your desktop to light or dark mode.
-
-```applescript
-setDarkMode()
-setLightMode()
-```
 
 
 ### `checkNetAccess(<web address>)`
@@ -230,18 +212,6 @@ Or, open the MacOS System Information app and navigate to the "Bluetooth" sectio
 
 Or, open a terminal and run `system_profiler SPBluetoothDataType` 
 
-### `disableBluetooth() / enableBluetooth()`
-
-Enable or disable Bluetooth.
-
-<div class="alert alert-warning" role="alert">
-CAUTION: if you are using Bluetooth mouse and keyboard, then make sure you have a method to re-enable Bluetooth. The built-in mouse and keyboard are fine for a Macbook.  For Mac Mini and iMac, keep a cable handy to connect the mouse and keyboard directly to your Mac.
-</div>
-
-```applescript
-disableBluetooth()
-enableBluetooth()
-```
 
 
 ### `openWebPage(<browser>, <web-address>)`
@@ -313,42 +283,5 @@ This is a new project. I'm keen to hear your feedback and suggestions.
 The [GitHub issues page for gp-support-act](https://github.com/musios-app/gp-support-act/issues) is the best place questions, suggestions, bugs and requests. 
 
 Alternatively, post a message on the Gig Performer forum. I'm there as "[Andrew](https://community.gigperformer.com/u/andrew/summary)".
-
-
-
-### GP Support Act - the script
-
-```applescript
-{% include_relative gp-support-act.applescript %}
-```
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const preElements = document.querySelectorAll('.rouge-table .rouge-code pre');
-    preElements.forEach((pre, index) => {
-      const rougeCode = pre.closest(".rouge-code")
-      const button = document.createElement('button');
-      button.className = 'rouge-code-copy-button';
-      button.innerHTML = '<i class="fa-regular fa-copy"></i>'
-
-      button.addEventListener('click', () => {
-          const code = pre.innerText;
-          navigator.clipboard.writeText(code).then(() => {
-              button.classList.add('success');
-              setTimeout(() => {
-                button.classList.remove('success');
-              }, 250)
-          }).catch(err => {
-              console.error('Failed to copy: ', err);
-          });
-      });
-
-      pre.parentNode.insertBefore(button, pre.nextSibling);
-    });
-  });
-
-</script>
-
 
 
