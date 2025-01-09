@@ -33,7 +33,7 @@ on setSoundDevice(type, deviceName)
 	if type is "alert" then set type to "system"
 	
 	try
-		set soundScript to "/opt/homebrew/bin/SwitchAudioSourcex -t " & type & " -s \"" & deviceName & "\""
+		set soundScript to "/opt/homebrew/bin/SwitchAudioSource -t " & type & " -s \"" & deviceName & "\""
 		do shell script soundScript
 	on error errMsg
 		if (offset of "No such file or directory" in errMsg) > 0 then
