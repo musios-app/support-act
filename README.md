@@ -2,7 +2,7 @@
 layout: default
 title: Support Act
 description: Support Act is a configurable AppleScript script to support your <a href="https://gigperformer.com/">Gig Performer</a> habit. Use it to check that your system is ready for the gig, then start up apps you need for your gig, and finally starts Gig Performer. It can do a long list of checks and actions that get your system ready for GP. Oh, you can also make another script to restore your settings after the gig too.
-gitrepo: https://github.com/musios-app/gp-support-act
+gitrepo: https://github.com/musios-app/support-act
 tags: gig-performer utility script
 image: assets/images/gig-performer-icon-512x512.jpg
 ---
@@ -18,7 +18,7 @@ NOTE:
 </div>
 
 
-### Capabilities
+## Capabilities
 
 <div class="next-list-check"></div>
 
@@ -29,6 +29,7 @@ NOTE:
   * MIDI devices
   * USB devices
   * Bluetooth devices
+* Set up your audio devices
 * Open applications, files and web pages:
   * Chart files, playlists, lyrics...
   * MuseScore, Ultimate Guitar, lyrics
@@ -43,25 +44,35 @@ NOTE:
 
 The implementation is intended to be resilient to errors. For example, if an external drive is missing, an audio device is not connected, or a web page is unreachable, then the script will offer you the option to continue or stop. (There are some limits to this that can be addressed in future versions.)
 
-### Example
+## Example
 
-This script shows some of things that can be done with support act. 
-You can change and add actions to suit your rig and performance needs.
-If there's a problem with your environment (like a missing file or device), then the script will warn you and give the optioin to stop and fix, or continue.
+To create your own script open Apple's `Script Editor` application and create a new script. 
+
+This example shows some things that can be done with support act. There's an explanation of each utility function below so that you can change and add actions to suit your rig and performance needs.
+
+Need to restore your computer when you're back home? Just create a similar script that restores things for your studio.
 
 ```applescript
--- Leave this mumbo-jumbo unchanged. It loads the utilities
-set prepareScript to "cd \"$HOME/Library/Script Libraries\"; osacompile -o support-act.scpt support-act.applescript"
-do shell script prepareScript
--- End of mumbo-jumbo
+-- Setup for Friday night gig
 
-tell script "gp-support-act"
-  -- Setup for Friday night gig
+tell script "support-act"  
   setDarkMode()
-  checkNetAccess("www.musescore.com")
-  checkFileOrFolderAccessible("/Volumes/ExternalSSD/Instruments")
-  checkAudioDeviceConnected("EVO8")
+
+  checkAudioDeviceConnected("FLOW8")
+  setSoundDevice("input", "FLOW8")
+  setSoundDevice("output", "FLOW8")
+  setVolume("input", 50)
+  setVolume("output", 90) -- about -1dB
+
   checkUSBDeviceConnected("XPIANO73")
+
+  -- No beeps through FOH speakers!
+  setSoundDevice("alert", "Mac mini Speakers")
+  setVolume("alert", 20)
+
+  checkNetAccess("www.musescore.com")
+
+  checkFileOrFolderAccessible("/Volumes/ExternalSSD/Instruments")
   openDocument("/Users/musios/Documents/Bome MIDI Translator/Presets/numa-x-piano73.bmtp")
   openWebPage("Google Chrome", "https://musescore.com/official_scores/scores/6937415")
   openDocument("/Users/musios/charts/Let me entertain you - Robbie Williams.pdf")
@@ -69,47 +80,30 @@ tell script "gp-support-act"
 end tell
 ```
 
-### Notes on AppleScript syntax
+#### Notes on AppleScript syntax
 
 AppleScript is written to be human-readable. You don't need programming experience to modify the script. Two things that might help to know:
 
 1. Text after "--" is a comment (that's 2 hyphens)
-2. The `'¬'` character is a 'line continuation' character meaning that the current line continues on to the next line. I use it for arrays with many items. 
+1. The `'¬'` character is a 'line continuation' character meaning that the current line continues on to the next line. I use it for arrays with many items. 
+1. If you need to copy file names to the script, then you can drag and drop the file into the Script Editor window. The full path will be copied to the script.
+1. Or... you can Copy the file in Finder then paste into the Script Editor window. The full path will be copied to the script.  You may need to remove the `\` backslash characters and/or add double quotes around the filename.
 
 
-## Start using GP Support Act
+## Install the Support Act script
 
-[GP support act](https://github.com/musios-app/gp-support-act/releases) is maintained in GitHub in the [`gp-support-act`](https://github.com/musios-app/gp-support-act) repository.
+[Support act](https://github.com/musios-app/support-act/releases) is maintained in GitHub in the [`support-act`](https://github.com/musios-app/support-act) repository.
 
-1. Download the ZIP file and unzip the contents
-2. In Finder, copy the file `support-act.applescript`
-3. Also in Finder, use the "Go -> Go to folder..."
-4. Enter "~/Library" then hit Return
-5. Right-click (or Ctrl-click) on "Script Libraries" then "Services > New Terminal in Folder". 
-6. (Before using the terminal) open the "Script Libraries" (double-click)
-7. Paste the file (`support-act.applescript` from above)
-8. In the terminal, run this command `osacompile -o support-act.scpt support-act.applescript`
-9. Check that there is now a file `support-act.scpt`
-
-
-
-### Configuration: your script for your environment
-
-The script is written in AppleScript and is intended to be easy to modify to your environment and needs.
-
-Change the "Configuration" section at the top. There are examples and comments.
-
-The utility scripts are the second half of the file. You can modify these if you need to, but they are intended to be general-purpose.
-
-If you're comfortable with AppleScript and shell script, then jump right in. The detail below is intended for users who are new to AppleScript and/or the command line.
-
-
-
-### Copying file names to the script
-
-If you need to copy file names to the script, then you can drag and drop the file into the Script Editor window. The full path will be copied to the script.
-
-Alternatively, you can Copy the file in Finder then paste into the Script Editor window. The full path will be copied to the script.  You may need to remove the `\` backslash characters and/or add double quotes around the filename.
+1. Got to the script page for [support-act.applescript](https://github.com/musios-app/support-act/blob/main/support-act.applescript)
+1. Click the download button 
+1. Now in Finder, open your Downloads directory and Copy the file `support-act.applescript`
+1. Also in Finder, use the "Go -> Go to folder..."
+1. Enter "~/Library" then hit Return
+1. Right-click (or Ctrl-click) on "Script Libraries" then "Services > New Terminal in Folder". 
+1. Before using the terminal, open the "Script Libraries" (double-click)
+1. Paste the `support-act.applescript` file
+1. In the terminal, run this command `osacompile -o support-act.scpt support-act.applescript`
+1. Check that there is now a file `support-act.scpt`
 
 
 ## Utility functions
@@ -118,6 +112,49 @@ Alternatively, you can Copy the file in Finder then paste into the Script Editor
 
 Switch your desktop to light or dark mode.
 
+```applescript
+setLightMode()
+setDarkMode()
+```
+
+
+### `listConnectedAudioDevices()`
+
+Pops a text editor window with all the audio devices currently connected to your system. This is useful for getting the exact device names.
+
+```applescript
+listConnectedAudioDevices()
+```
+
+
+### `setSoundDevice(<type>, <deviceName>)`
+
+<div class="alert alert-warning" role="alert">
+NOTES: 
+
+* This utility requires that a separate SwitchAudioSource app is installed from https://github.com/deweller/switchaudio-osx
+* This sets the computer's Sound Preferences. It is sufficient for many rigs but not more complex devices and systems.
+</div>
+
+Select a sound device. The `type` must be one of `"input"`, `"output"` or `"alert"`. These correspond to the 3 devices in Mac's Sound Settings.  "Alert" is for beeps for mail, social media, system errors and all the other noise you don't want through front-of-house.
+
+The device name must be exactly as listed by `listConnectedAudioDevices()`.
+
+```applescript
+setSoundDevice("input", "XPIANO73")
+setSoundDevice("output", "XPIANO73")
+setSoundDevice("alert", "Mac mini Speakers")
+```
+
+### `setVolume(<type>, <volumeLevel>)`
+
+Set the volume of a sound device. The `type` must be one of `"input"`, `"output"` or `"alert"`. These correspond to the 3 devices in Mac's Sound Settings.  "Alert" is for beeps for mail, social media, system errors and all the other noise you don't want through front-of-house.
+
+```applescript
+setVolume("input", 50)
+setVolume("output", 90)
+setVolume("alert", 50)
+```
 
 ### `checkNetAccess(<web address>)`
 
@@ -143,7 +180,7 @@ cloudDownload("/Users/musios/Hey Bulldog - The Beatles")
 
 ### `checkFileOrFolderAccessible(<disk-path>)`
 
-Check that external disks are connected to ensure that plugin data, sheet music and other content is accessible before starting GP.
+Check that external disks are connected to ensure that plugin data, sheet music or other data is accessible.
 
 ```applescript
 checkFileOrFolderAccessible("/Volumes/MusicSSD/Instruments")
@@ -280,7 +317,7 @@ openDocument("/Users/musios/Documents/Gig Performer/Gig Files/demo.gig")
 
 This is a new project. I'm keen to hear your feedback and suggestions.
 
-The [GitHub issues page for gp-support-act](https://github.com/musios-app/gp-support-act/issues) is the best place questions, suggestions, bugs and requests. 
+The [GitHub issues page for support-act](https://github.com/musios-app/support-act/issues) is the best place questions, suggestions, bugs and requests. 
 
 Alternatively, post a message on the Gig Performer forum. I'm there as "[Andrew](https://community.gigperformer.com/u/andrew/summary)".
 
