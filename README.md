@@ -6,7 +6,9 @@ gitrepo: https://github.com/musios-app/support-act
 tags: gig-performer utility script
 image: assets/images/gig-performer-icon-512x512.jpg
 ---
-<!-- This comment prevents GitHub from displaying the front matter -->
+<!--
+This comment prevents GitHub from displaying the front matter
+-->
 
 # Support Act
 
