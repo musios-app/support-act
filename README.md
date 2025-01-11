@@ -6,9 +6,6 @@ gitrepo: https://github.com/musios-app/support-act
 tags: gig-performer utility script
 image: assets/images/gig-performer-icon-512x512.jpg
 ---
-<!--
-This comment prevents GitHub from displaying the front matter
--->
 
 # Support Act
 
@@ -25,45 +22,6 @@ NOTE:
 
 <div class="next-list-check"></div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <b>Set up environment</b>
-      <ul>
-        <li>Audio devices</li>
-        <li>Light / dark mode</li>
-        <li>(more to come)</li>
-      </ul>
-    </div>
-
-    <div class="col-md-4">
-      <b>Check connections</b>
-      <ul>
-        <li>Internet connections</li>
-        <li>Check sites are reachable</li>
-        <li>External storage</li>
-        <li>Audio devices</li>
-        <li>MIDI devices</li>
-        <li>USB devices</li>
-        <li>Bluetooth devices</li>
-      </ul>
-    </div>
-
-    <div class="col-md-4">
-      <b>Open apps, files, web</b>
-      <ul>
-        <li>Chart files, playlists, lyrics...</li>
-        <li>MuseScore, Ultimate Guitar, lyrics</li>
-        <li>BOME and other MIDI Utilities</li>
-        <li>Web pages for lyrics, sheet music</li>
-        <li>Documents such as Word, Excel, Notes</li>
-        <li>Open documents like playlists, lyrics, etc.</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<!--
 * Check connections:
   * Internet connections and that specific sites are reachable
   * External storage
@@ -83,7 +41,7 @@ NOTE:
   * Switch to light or dark mode
 * Start Gig Performer with your Gig file
 * And most other tasks you need that can be run from the command line
--->
+
 
 The implementation is intended to be resilient to errors. For example, if an external drive is missing, an audio device is not connected, or a web page is unreachable, then the script will offer you the option to continue or stop. (There are some limits to this that can be addressed in future versions.)
 
