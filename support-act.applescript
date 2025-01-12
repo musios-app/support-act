@@ -24,6 +24,25 @@ end setLightMode
 
 
 
+-- Enable or disable Siri
+on disableSiri()
+	set shellScript to "defaults write com.apple.assistant.support \"Assistant Enabled\" -bool false"
+	do shell script shellScript
+	
+	-- set shellScript to "defaults write com.apple.Siri StatusMenuVisible -bool false"
+	-- do shell script shellScript
+end disableSiri
+
+on enableSiri()	
+	set shellScript to "defaults write com.apple.assistant.support \"Assistant Enabled\" -bool true"
+	do shell script shellScript
+	
+	-- set shellScript to "defaults write com.apple.Siri StatusMenuVisible -bool true"
+	-- do shell script shellScript
+end enableSiri
+
+
+
 on setSoundDevice(type, deviceName)
 	set types to {"alert", "input", "output"}
 	if not (types contains type) then

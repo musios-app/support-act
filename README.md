@@ -57,6 +57,7 @@ Need to restore your computer when you're back home? Just create a similar scrip
 
 tell script "support-act"  
   setDarkMode()
+  disableSiri()
 
   checkAudioDeviceConnected("FLOW8")
   setSoundDevice("input", "FLOW8")
@@ -115,6 +116,17 @@ Switch your desktop to light or dark mode.
 ```applescript
 setLightMode()
 setDarkMode()
+```
+
+### `disableSiri(); enableSiri()`
+
+Siri and other Apple AI can compete for system resources. Disable Siri before a gig and re-enable afterwards (if you use Siri).
+
+NOTE: on Sequoia 15.2, the menu bar icon for Siri does not update when Siri is enabled/disabled by this utility. Same for the Siri state in the System Settings. This appears to be a minor Mac issue.
+
+```applescript
+disableSiri()
+enableSiri()
 ```
 
 
