@@ -6,21 +6,22 @@
 -- Documentation & source: https://github.com/musios-app/support-act
 ---------------------------------------------------------------------------------
 
-on setScreenMode(newMode)
+on setDarkMode()
 	tell application "System Events"
 		tell appearance preferences
-			set dark mode to newMode
+			set dark mode to true
 		end tell
 	end tell
-end setScreenMode
-
-on setDarkMode()
-	setScreenMode(true)
 end setDarkMode
 
 on setLightMode()
-	setScreenMode(false)
+	tell application "System Events"
+		tell appearance preferences
+			set dark mode to false
+		end tell
+	end tell
 end setLightMode
+
 
 
 on setSoundDevice(type, deviceName)
@@ -84,6 +85,7 @@ end cloudDownload
 
 
 on checkNetAccess(site)
+	-- Use netcat to check if a site is accessible
 	set shellScript to "TEMP=$(nc -z -G 5 " & site & " 80 2>&1); echo $TEMP"
 	set report to do shell script shellScript
 	
