@@ -315,6 +315,18 @@ openDocument("/Users/musios/Documents/Gig Performer/Gig Files/demo.gig")
 ```
 
 
+## WIP / Roadmap
+
+I think these a priorities from the [Issues](https://github.com/musios-app/support-act/issues) list.
+I still need to determine which ones can be achieved correctly and safely from the script.
+
+* [#20](https://github.com/musios-app/support-act/issues/20) - Enable "Do Not Disturb" mode
+* [#21](https://github.com/musios-app/support-act/issues/21) - Run a user-defined shortcut
+* [#8](https://github.com/musios-app/support-act/issues/8) - Disable desktop widgets
+* [#10](https://github.com/musios-app/support-act/issues/10) - Disable sleep and screen saver (or start Amphetimine)
+* [#13](https://github.com/musios-app/support-act/issues/13) - Disable Spotlight indexing
+* [#16](https://github.com/musios-app/support-act/issues/15) - List Rosetta apps in use
+
 ## Support & Feedback
 
 This is a new project. I'm keen to hear your feedback and suggestions.
