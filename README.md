@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Support Act
-description: Support Act is a configurable AppleScript script to support your <a href="https://gigperformer.com/">Gig Performer</a> habit. Use it to check that your system is ready for the gig, then start up apps you need for your gig, and finally starts Gig Performer. It can do a long list of checks and actions that get your system ready for GP. Oh, you can also make another script to restore your settings after the gig too.
+description: AppleScript utilities to support your <a href="https://gigperformer.com/">Gig Performer</a> habit. Use it to check that your system is ready for the gig, then start up apps you need for your gig, and finally starts Gig Performer. It can do a long list of checks and actions that get your system ready for GP. Oh, you can also make another script to restore your settings after the gig too.
 gitrepo: https://github.com/musios-app/support-act
 tags: gig-performer utility script
 image: assets/images/gig-performer-icon-512x512.jpg
@@ -41,6 +41,7 @@ NOTE:
   * Switch to light or dark mode
 * Start Gig Performer with your Gig file
 * And most other tasks you need that can be run from the command line
+
 
 The implementation is intended to be resilient to errors. For example, if an external drive is missing, an audio device is not connected, or a web page is unreachable, then the script will offer you the option to continue or stop. (There are some limits to this that can be addressed in future versions.)
 
