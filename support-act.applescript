@@ -23,7 +23,6 @@ on setLightMode()
 end setLightMode
 
 
-
 -- Enable or disable Siri
 on disableSiri()
 	set shellScript to "defaults write com.apple.assistant.support \"Assistant Enabled\" -bool false"
@@ -187,3 +186,32 @@ on runTerminalCommand(cmd)
 	end tell
 end runTerminalCommand
 
+
+
+on showInstruction(theTitle, theMessage)
+	
+	display dialog theMessage Â
+		with title theTitle Â
+		with icon note buttons {"Continue", "Stop"} Â
+		default button Â
+		"Continue" cancel button "Stop"
+	
+end showInstruction
+
+
+on showStepInstructions(theTitle, theSteps)
+	
+	set theMessage to ""
+	set lineNum to 1
+	repeat with theLine in theSteps
+		set theMessage to theMessage & lineNum & ". " & theLine & tab & return
+		set lineNum to lineNum + 1
+	end repeat
+	
+	display dialog theMessage Â
+		with title theTitle Â
+		with icon note buttons {"Continue", "Stop"} Â
+		default button Â
+		"Continue" cancel button "Stop"
+	
+end showStepInstructions
