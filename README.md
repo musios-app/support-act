@@ -23,6 +23,11 @@ NOTE:
 
 <div class="next-list-check"></div>
 
+* Set up your environment
+  * Audio devices for input, output and system alerts with volume
+  * Switch to light or dark mode
+  * Disable / enable Siri
+  * Disable / enable desktop widgets
 * Check connections:
   * Internet connections and that specific sites are reachable
   * External storage
@@ -30,7 +35,6 @@ NOTE:
   * MIDI devices
   * USB devices
   * Bluetooth devices
-* Set up your audio devices
 * Open applications, files and web pages:
   * Chart files, playlists, lyrics...
   * MuseScore, Ultimate Guitar, lyrics
@@ -38,8 +42,7 @@ NOTE:
   * Web pages for lyrics, sheet music
   * Documents such as Word, Excel, Notes
   * Open documents like playlists, lyrics, etc.
-* Other environment setup
-  * Switch to light or dark mode
+* Popup reminders for manual tasks 
 * Start Gig Performer with your Gig file
 * And most other tasks you need that can be run from the command line
 
@@ -61,7 +64,7 @@ tell script "support-act"
   setDarkMode()
   disableSiri()
   hideDesktopWidgets()
-  
+
   beep 1 -- get our attention
 
   -- When Support Act can't automate, popup user instructions
@@ -200,9 +203,8 @@ end tell
 
 <div class="alert alert-warning" role="alert">
 NOTES: 
-
-* This utility requires that a separate SwitchAudioSource app is installed from https://github.com/deweller/switchaudio-osx
-* This sets the computer's Sound Preferences. It is sufficient for many rigs but not more complex devices and systems.
+<li>This utility requires that a separate SwitchAudioSource app is installed from https://github.com/deweller/switchaudio-osx</li>
+<li>This sets the computer's Sound Preferences. It is sufficient for many rigs but not more complex devices and systems.</li>
 </div>
 
 Select a sound device. The `type` must be one of `"input"`, `"output"` or `"alert"`. These correspond to the 3 devices in Mac's Sound Settings.  "Alert" is for beeps for mail, social media, system errors and all the other noise you don't want through front-of-house.
@@ -480,8 +482,6 @@ I think these a priorities from the [Issues](https://github.com/musios-app/suppo
 I still need to determine which ones can be achieved correctly and safely from the script.
 
 * [#21](https://github.com/musios-app/support-act/issues/21) - Run a user-defined shortcut
-* [#8](https://github.com/musios-app/support-act/issues/8) - Disable desktop widgets
-* [#10](https://github.com/musios-app/support-act/issues/10) - Disable sleep and screen saver (or start Amphetimine)
 * [#13](https://github.com/musios-app/support-act/issues/13) - Disable Spotlight indexing
 * [#16](https://github.com/musios-app/support-act/issues/15) - List Rosetta apps in use
 
@@ -492,5 +492,3 @@ Please send your feedback and suggestions about this new project.
 The [GitHub issues page for support-act](https://github.com/musios-app/support-act/issues) is the best place questions, suggestions, bugs and requests. 
 
 Alternatively, post a message on the Gig Performer forum. I'm there as "[Andrew](https://community.gigperformer.com/u/andrew/summary)".
-
-
