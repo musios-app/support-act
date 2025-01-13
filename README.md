@@ -25,11 +25,6 @@ NOTE:
   * Switch to light or dark mode
   * Disable / enable Siri
   * Disable / enable desktop widgets
-* Set up your environment
-  * Audio devices for input, output and system alerts with volume
-  * Switch to light or dark mode
-  * Disable / enable Siri
-  * Disable / enable desktop widgets
 * Check connections:
   * Internet connections and that specific sites are reachable
   * External storage
