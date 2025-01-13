@@ -228,10 +228,10 @@ end runTerminalCommand
 -- Popup that shows an instruction message to the user
 on showInstruction(theTitle, theMessage)
 	
-	display dialog theMessage Â
-		with title theTitle Â
-		with icon note buttons {"Continue", "Stop"} Â
-		default button Â
+	display dialog theMessage Â¬
+		with title theTitle Â¬
+		with icon note buttons {"Continue", "Stop"} Â¬
+		default button Â¬
 		"Continue" cancel button "Stop"
 	
 end showInstruction
@@ -246,10 +246,10 @@ on showStepInstructions(theTitle, theSteps)
 		set lineNum to lineNum + 1
 	end repeat
 	
-	display dialog theMessage Â
-		with title theTitle Â
-		with icon note buttons {"Continue", "Stop"} Â
-		default button Â
+	display dialog theMessage Â¬
+		with title theTitle Â¬
+		with icon note buttons {"Continue", "Stop"} Â¬
+		default button Â¬
 		"Continue" cancel button "Stop"
 	
 end showStepInstructions
@@ -265,9 +265,9 @@ on startAmphetamineSession(durationMinutes)
 		delay 1
 		start new session with options {duration: durationMinutes, interval: minutes, displaySleepAllowed: false}
 	end tell	
-end stayAwake
+end startAmphetamineSession
 
 on endAmphetamineSession()
 	tell application "Amphetamine" to end session
-end stayAwake
+end endAmphetamineSession
 
