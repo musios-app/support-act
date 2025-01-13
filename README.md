@@ -15,6 +15,7 @@ Support Act is a configurable AppleScript script to set up your Mac for a perfor
 NOTE:
 <li>This utility is for MacOS only because it uses AppleScript</li>
 <li>This version is an early release thats needs wider testing</li>
+<li>Developed and tested on macOS Sequoia 15.2 with Applescript version 2.8</li>
 </div>
 
 
@@ -102,7 +103,7 @@ end tell
 
 #### Notes on AppleScript syntax
 
-AppleScript is written to be human-readable. You don't need programming experience to modify the script. Two things that might help to know:
+AppleScript is written to be human-readable. You don't need programming experience to create a Support Act script. Things that might help to know:
 
 1. Text after 2 hyphens "--" is a comment
 1. The `'¬'` character is a 'line continuation' character meaning that the current line continues on to the next line. I use it for arrays with many items. 
@@ -114,18 +115,18 @@ AppleScript is written to be human-readable. You don't need programming experien
 
 ## Install the Support Act script
 
-[Support act](https://github.com/musios-app/support-act/releases) is maintained in GitHub in the [`support-act`](https://github.com/musios-app/support-act) repository.
+[Support Act](https://github.com/musios-app/support-act) is maintained in GitHub.  To install, open the `Terminal` app from Application > Terminal.  Then copy and paste this entire command to do the installation or an update. It downloads the Support Act script and compiles it in your Script Libraries directory from where they can be utilitized by any script.
 
-1. Got to the script page for [support-act.applescript](https://github.com/musios-app/support-act/blob/main/support-act.applescript)
-1. Click the download button 
-1. Now in Finder, open your Downloads directory and Copy the file `support-act.applescript`
-1. Also in Finder, use the "Go -> Go to folder..."
-1. Enter "~/Library" then hit Return
-1. Right-click (or Ctrl-click) on "Script Libraries" then "Services > New Terminal in Folder". 
-1. Before using the terminal, open the "Script Libraries" (double-click)
-1. Paste the `support-act.applescript` file
-1. In the terminal, run this command `osacompile -o support-act.scpt support-act.applescript`
-1. Check that there is now a file `support-act.scpt`
+```
+(cd ${HOME}/Library/Script\ Libraries && \
+    curl -s https://raw.githubusercontent.com/musios-app/support-act/main/support-act.applescript -o support-act.applescript &&
+    osacompile -o support-act.scpt support-act.applescript)
+```
+
+Alternatively, to install manually:
+
+* Click on [support-act.applescript](https://raw.githubusercontent.com/musios-app/support-act/main/support-act.applescript) to download the script as source code
+* Using Finder (or terminal), move the file from Downloads to the `Library/Script Libraries` in your home directory.
 
 
 ## Utility functions
