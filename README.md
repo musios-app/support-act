@@ -59,6 +59,8 @@ Need to restore your computer when you're back home? Just create a similar scrip
 tell script "support-act"  
   setDarkMode()
   disableSiri()
+  
+  showInstruction("Manual", "Enable Do Not Disturb mode")
 
   checkAudioDeviceConnected("FLOW8")
   setSoundDevice("input", "FLOW8")
@@ -319,6 +321,32 @@ itermCommand("open -a Preview /Users/musios/charts/*.pdf")
 ```
 
 
+### `showInstruction(theTitle, theMessage)`
+
+### `showStepInstructions(theTitle, theSteps)`
+
+When something cannot be automated by Support Act, use a popup with instructions on how to perform a task manually.  This is useful to:
+
+* Manually perform tasks that cannot be automated by Support Act (e.g. switch on hardware)
+* Perform tasks that require synchonisation (e.g. switch on hardware at the right point in the Support Act sequence)
+* Steps that require additional security (e.g. admin privileges)
+
+```applescript
+showInstruction("Turn on the mixer", "Turn on the mixer then press Continue")
+```
+
+```applescript
+set theSteps to { ¬
+  "In the menu bar, click the Dropbox icon", ¬
+  "Find the sync status at the bottom on the Dropbox popup", ¬
+  "Select \"Pause until tomorrow\"" ¬
+}
+
+showStepInstructions("Pause DropBox sync", theSteps)
+```
+
+
+
 ### Finally, start Gig Performer
 
 Once all the checks are complete, you can start Gig Performer with a specific Gig file. 
@@ -328,12 +356,22 @@ openDocument("/Users/musios/Documents/Gig Performer/Gig Files/demo.gig")
 ```
 
 
+## Roadmap, Security & MacOS changes
+
+Most MacOS major releases (Monterey, Ventura, Sonoma, Sequoia etc.) introduce changes that affect the desktop design and security model. 
+For a tool like Support Act, this makes it challenging maintain a stable version across the varients.
+
+Some important utility functions that are not yet implemented for security:
+
+* Disable internet connection (requires admin permission)
+* [#20](https://github.com/musios-app/support-act/issues/20) - Enable "Do Not Disturb" mode (the terminal commands and UI have changed)
+* [#19](https://github.com/musios-app/support-act/issues/19) - Disabling CPU-hogging daemons (requires admin permission and care)
+
 ## WIP / Roadmap
 
 I think these a priorities from the [Issues](https://github.com/musios-app/support-act/issues) list.
 I still need to determine which ones can be achieved correctly and safely from the script.
 
-* [#20](https://github.com/musios-app/support-act/issues/20) - Enable "Do Not Disturb" mode
 * [#21](https://github.com/musios-app/support-act/issues/21) - Run a user-defined shortcut
 * [#8](https://github.com/musios-app/support-act/issues/8) - Disable desktop widgets
 * [#10](https://github.com/musios-app/support-act/issues/10) - Disable sleep and screen saver (or start Amphetimine)
@@ -342,7 +380,7 @@ I still need to determine which ones can be achieved correctly and safely from t
 
 ## Support & Feedback
 
-This is a new project. I'm keen to hear your feedback and suggestions.
+Please send your feedback and suggestions about this new project.
 
 The [GitHub issues page for support-act](https://github.com/musios-app/support-act/issues) is the best place questions, suggestions, bugs and requests. 
 
