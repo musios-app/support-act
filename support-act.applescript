@@ -163,10 +163,48 @@ on openWebPage(browser, page)
 end openWebPage
 
 
+on openWithApplication(theApp, path)
+	tell application theApp
+		activate
+		delay 2
+		open path
+	end tell
+end openWithApplication
+
+
 on openDocument(docPath)
 	set targetPath to POSIX file docPath as alias
 	tell application "Finder" to open targetPath
 end openDocument
+
+
+on chooseFile(question, fileList, dir)
+	set existsList to {}
+	repeat with theFile in fileList
+		try
+			set sep to ""
+			if theFile does not start with "/" and dir does not end with "/" then
+				sep = "/"
+			end if
+			
+			set filepath to dir & "/" & theFile
+			set fileInfo to info for filepath
+			copy theFile to the end of the existsList
+		end try
+	end repeat
+	
+	if existsList is {} then error "Not valid files in the list"
+
+	choose from list existsList with prompt question OK button name "Open" cancel button name "Cancel"
+	
+	if the result is not false then
+		set selectedFilePath to dir & "/" & (item 1 of the result)
+		return selectedFilePath
+	else
+		error "No valid file selected"
+	end if
+	
+end chooseFile
 
 
 on itermCommand(cmd)

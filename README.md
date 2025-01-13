@@ -99,10 +99,14 @@ end tell
 
 AppleScript is written to be human-readable. You don't need programming experience to modify the script. Two things that might help to know:
 
-1. Text after "--" is a comment (that's 2 hyphens)
+1. Text after 2 hyphens "--" is a comment
 1. The `'¬'` character is a 'line continuation' character meaning that the current line continues on to the next line. I use it for arrays with many items. 
 1. If you need to copy file names to the script, then you can drag and drop the file into the Script Editor window. The full path will be copied to the script.
 1. Or... you can Copy the file in Finder then paste into the Script Editor window. The full path will be copied to the script.  You may need to remove the `\` backslash characters and/or add double quotes around the filename.
+1. Need a simple notification? Try `beep 1` or `beep 11` for 1 or many alerts.
+1. Put some text into the clipboard to save typing: `set the clipboard to "Example text"`.
+
+
 
 
 ## Install the Support Act script
@@ -128,8 +132,10 @@ AppleScript is written to be human-readable. You don't need programming experien
 Switch your desktop to light or dark mode.
 
 ```applescript
-setLightMode()
-setDarkMode()
+tell script "support-act"
+  setLightMode()
+  setDarkMode()
+end tell
 ```
 
 ### `disableSiri(); enableSiri()`
@@ -139,8 +145,10 @@ Siri and other Apple AI can compete for system resources. Disable Siri before a 
 NOTE: on Sequoia 15.2, the menu bar icon for Siri does not update when Siri is enabled/disabled by this utility. Same for the Siri state in the System Settings. This appears to be a minor Mac issue.
 
 ```applescript
-disableSiri()
-enableSiri()
+tell script "support-act"
+  disableSiri()
+  enableSiri()
+end tell
 ```
 
 
@@ -153,8 +161,10 @@ The recommended way to use Amphetamine is to create a "trigger" that will stop t
 Support Act has a simple option to keep-alive for a number of minutes plus the corresponding end-session utility.
 
 ```applescript
-startAmphetamineSession(90)
-endAmphetamineSession()
+tell script "support-act"
+  startAmphetamineSession(90)
+  endAmphetamineSession()
+end tell
 ```
 
 
@@ -163,7 +173,9 @@ endAmphetamineSession()
 Pops a text editor window with all the audio devices currently connected to your system. This is useful for getting the exact device names.
 
 ```applescript
-listConnectedAudioDevices()
+tell script "support-act"
+  listConnectedAudioDevices()
+end tell
 ```
 
 
@@ -181,9 +193,11 @@ Select a sound device. The `type` must be one of `"input"`, `"output"` or `"aler
 The device name must be exactly as listed by `listConnectedAudioDevices()`.
 
 ```applescript
-setSoundDevice("input", "XPIANO73")
-setSoundDevice("output", "XPIANO73")
-setSoundDevice("alert", "Mac mini Speakers")
+tell script "support-act"
+  setSoundDevice("input", "XPIANO73")
+  setSoundDevice("output", "XPIANO73")
+  setSoundDevice("alert", "Mac mini Speakers")
+end tell
 ```
 
 ### `setVolume(<type>, <volumeLevel>)`
@@ -193,9 +207,11 @@ Set the volume of a sound device. The `type` must be one of `"input"`, `"output"
 The `volumeLevel` must be an integer from 0-100 which is `-Inf DB` to `0dB`. For values in between, open Apple's "Audio MIDI Setup" application. Open the "Audio Devices" window. This shows the mapping from the integer volume level to dB level.  (For example, `50` is equivalent to `-6dB`)
 
 ```applescript
-setVolume("input", 50)
-setVolume("output", 90)
-setVolume("alert", 50)
+tell script "support-act"
+  setVolume("input", 50)
+  setVolume("output", 90)
+  setVolume("alert", 50)
+end tell
 ```
 
 ### `checkNetAccess(<web address>)`
@@ -203,9 +219,11 @@ setVolume("alert", 50)
 This function checks that the computer has internet access and that a specific site is reachable. You must provide a web address to check. For general checks a site like `www.google.com` is a good choice. If your performance relies on a specific site, then use that.
 
 ```applescript
-checkNetAccess("www.google.com")
-checkNetAccess("www.musescore.com")
-checkNetAccess("127.0.0.1")
+tell script "support-act"
+  checkNetAccess("www.google.com")
+  checkNetAccess("www.musescore.com")
+  checkNetAccess("127.0.0.1")
+end tell
 ```
 
 ### `cloudDownload(<file-path>)`
@@ -217,7 +235,9 @@ This function need to force a download files to your local drive so your perform
 Depending upon the size of the file or directory, this may take a while. It's recommended that you use the "Keep Local" option in your cloud storage app to keep the files on your computer.
 
 ```applescript
-cloudDownload("/Users/musios/Hey Bulldog - The Beatles")
+tell script "support-act"
+  cloudDownload("/Users/musios/Hey Bulldog - The Beatles")
+end tell
 ```
 
 ### `checkFileOrFolderAccessible(<disk-path>)`
@@ -225,7 +245,9 @@ cloudDownload("/Users/musios/Hey Bulldog - The Beatles")
 Check that external disks are connected to ensure that plugin data, sheet music or other data is accessible.
 
 ```applescript
-checkFileOrFolderAccessible("/Volumes/MusicSSD/Instruments")
+tell script "support-act"
+  checkFileOrFolderAccessible("/Volumes/MusicSSD/Instruments")
+end tell
 ```
 
 Note: `checkFileOrFolderAccessible` does not force a download of cloud files. For that, use `cloudDownload()`.
@@ -236,10 +258,15 @@ Note: `checkFileOrFolderAccessible` does not force a download of cloud files. Fo
 Check that a specific audio device is connected. 
 
 ```applescript
-checkAudioDeviceConnected("EVO8")
-checkAudioDeviceConnected("FLOW8")
-checkAudioDeviceConnected("MacBook Air Speakers")
-checkAudioDeviceConnected("MacBook Air Microphone")
+tell script "support-act"
+  checkAudioDeviceConnected("EVO8")
+  checkAudioDeviceConnected("FLOW8")
+
+  checkAudioDeviceConnected("MacBook Air Speakers")
+  checkAudioDeviceConnected("MacBook Air Microphone")
+  
+  checkAudioDeviceConnected("Mac mini Microphone")
+end tell
 ```
 
 Note: this check does NOT distinguish between input and output devices (but this doesn't normally matter).
@@ -256,14 +283,18 @@ To find out the exact names of your audio devices try one of these...
 Check that a USB device is connected by providing the exact name.
 
 ```applescript
-checkUSBDeviceConnected("XPIANO73")
-checkUSBDeviceConnected("Stream Deck Plus")
+tell script "support-act"
+  checkUSBDeviceConnected("XPIANO73")
+  checkUSBDeviceConnected("Stream Deck Plus")
+end tell
 ```
 
 To find the exact names of your USB devices:
 
 ```applescript
-listConnectedUSBDevices()
+tell script "support-act"
+  listConnectedUSBDevices()
+end tell
 ```
 
 Or, open the MacOS System Information app and navigate to the "USB" section.
@@ -277,14 +308,18 @@ and `system_profiler SPBluetoothDataType` command in a terminal
 Check that a Bluetooth device is connected by providing the exact name.
 
 ```applescript
-checkBluetoothDeviceConnected("FS-1-WL")
-checkBluetoothDeviceConnected("Seaboard Block JU4X")
+tell script "support-act"
+  checkBluetoothDeviceConnected("FS-1-WL")
+  checkBluetoothDeviceConnected("Seaboard Block JU4X")
+end tell
 ```
 
 To find the exact names of your USB devices:
 
 ```applescript
-listConnectedBlueoothDevices()
+tell script "support-act"
+  listConnectedBlueoothDevices()
+end tell
 ```
 
 Or, open the MacOS System Information app and navigate to the "Bluetooth" section.
@@ -292,14 +327,15 @@ Or, open the MacOS System Information app and navigate to the "Bluetooth" sectio
 Or, open a terminal and run `system_profiler SPBluetoothDataType` 
 
 
-
 ### `openWebPage(<browser>, <web-address>)`
 
 Open a web page in your preferred browser, such as "Safari", "Google Chrome", "Arc", or "Firefox". Use the full name that appears in your Application list. 
 
 ```applescript
-openWebPage("Firefox", "https://musescore.com/official_scores/scores/6937415")
-openWebPage("Google Chrome", "https://tabs.ultimate-guitar.com/tab/royal-blood/figure-it-out-official-2007289")
+tell script "support-act"
+  openWebPage("Firefox", "https://musescore.com/official_scores/scores/6937415")
+  openWebPage("Google Chrome", "https://tabs.ultimate-guitar.com/tab/royal-blood/figure-it-out-official-2007289")
+end tell
 ```
 
 Note: Firefox is preferrable to Chromium-based browsers (Google Chrome, Safari, Arc, Brave...) because of it's lower memory footprint.
@@ -312,11 +348,13 @@ The `openDocument` function opens a document in the default application that Fin
 Files for musical applications also work (if they work in Finder). For example, `.gig` files for Gig Performer, `.mscz` files for MuseScore, `.bmtp` files for BOME MIDI Translator, and many more.
 
 ```applescript
-openDocument("/Users/musios/charts/I'll forget you.pdf")
-openDocument("/Users/musios/charts/Celebration - Kool & the Gang/Celebration.mscz")
-openDocument("/Users/musios/charts/Song List.xlsx")
-openDocument("/Users/musios/charts/text-doc.txt")
-openDocument("/Users/musios/Documents/Bome MIDI Translator/Presets/Korg.bmtp")
+tell script "support-act"
+  openDocument("/Users/musios/charts/I'll forget you.pdf")
+  openDocument("/Users/musios/charts/Celebration - Kool & the Gang/Celebration.mscz")
+  openDocument("/Users/musios/charts/Song List.xlsx")
+  openDocument("/Users/musios/charts/text-doc.txt")
+  openDocument("/Users/musios/Documents/Bome MIDI Translator/Presets/Korg.bmtp")
+end tell
 ```
 
 Notes: 
@@ -324,6 +362,25 @@ Notes:
 * Many songs names contain quote characters like single apostrophe. These may cause script issues. If so, consider removing the quotes character from the filename and script
 * `openDocument` does not work with web pages
 * It does not work with regular expressions to match multiple files. If you need to open multiple files, then use a terminal command (below) to open them all at once.
+
+
+### `chooseFile(filenameList, [path])`
+
+Utility that checks that files exist then provides the user a choice of files. The script returns the full path of a file that is confirmed to exist.
+
+It provides the user an optional to cancel. It handles errors such empty lists and no valid Gig files.
+
+```applescript
+tell script "support-act"
+	set dir to "/Users/musios/Documents/Gig Performer/Gig Files"
+	set gigFiles to {"Decent Sampler/brass.gig", "gig-friday.gig", "bowie-tribute.gig", "template2.gig"}
+	set selected to chooseFile("Open which Gig file?" & return & dir & "...", gigFiles, dir)
+
+  openDocument(selected)
+end tell
+```
+
+
 
 
 
@@ -337,12 +394,14 @@ The `runTerminalCommand` and `itermCommand` functions each run a command in a te
 This is useful for commands that need to be monitored or stopped (like web servers, MIDI utilities) as the terminal window will stay open after the command has run.
 
 ```applescript
-runTerminalCommand("echo 'howdy'")
+tell script "support-act"
+  runTerminalCommand("echo 'howdy'")
 
-itermCommand("open -a 'Bome MIDI Translator Pro' '/Users/musios/Documents/Bome MIDI Translator/Presets/Casio PX-5S.bmtp'")
+  itermCommand("open -a 'Bome MIDI Translator Pro' '/Users/musios/Documents/Bome MIDI Translator/Presets/Casio PX-5S.bmtp'")
 
--- Open a folder full of PDF files in Preview
-itermCommand("open -a Preview /Users/musios/charts/*.pdf")
+  -- Open a folder full of PDF files in Preview
+  itermCommand("open -a Preview /Users/musios/charts/*.pdf")
+end tell
 ```
 
 
@@ -357,17 +416,21 @@ When something cannot be automated by Support Act, use a popup with instructions
 * Steps that require additional security (e.g. admin privileges)
 
 ```applescript
-showInstruction("Turn on the mixer", "Turn on the mixer then press Continue")
+tell script "support-act"
+  showInstruction("Turn on the mixer", "Turn on the mixer then press Continue")
+end tell
 ```
 
 ```applescript
-set theSteps to { ¬
-  "In the menu bar, click the Dropbox icon", ¬
-  "Find the sync status at the bottom on the Dropbox popup", ¬
-  "Select \"Pause until tomorrow\"" ¬
-}
+tell script "support-act"
+  set theSteps to { ¬
+    "In the menu bar, click the Dropbox icon", ¬
+    "Find the sync status at the bottom on the Dropbox popup", ¬
+    "Select \"Pause until tomorrow\"" ¬
+  }
 
-showStepInstructions("Pause DropBox sync", theSteps)
+  showStepInstructions("Pause DropBox sync", theSteps)
+end tell
 ```
 
 
@@ -377,7 +440,9 @@ showStepInstructions("Pause DropBox sync", theSteps)
 Once all the checks are complete, you can start Gig Performer with a specific Gig file. 
 
 ```applescript
-openDocument("/Users/musios/Documents/Gig Performer/Gig Files/demo.gig")
+tell script "support-act"
+  openDocument("/Users/musios/Documents/Gig Performer/Gig Files/demo.gig")
+end tell
 ```
 
 
