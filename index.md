@@ -23,6 +23,11 @@ NOTE:
 
 <div class="next-list-check"></div>
 
+* Set up your environment
+  * Audio devices for input, output and system alerts with volume
+  * Switch to light or dark mode
+  * Disable / enable Siri
+  * Disable / enable desktop widgets
 * Check connections:
   * Internet connections and that specific sites are reachable
   * External storage
@@ -30,7 +35,6 @@ NOTE:
   * MIDI devices
   * USB devices
   * Bluetooth devices
-* Set up your audio devices
 * Open applications, files and web pages:
   * Chart files, playlists, lyrics...
   * MuseScore, Ultimate Guitar, lyrics
@@ -38,11 +42,9 @@ NOTE:
   * Web pages for lyrics, sheet music
   * Documents such as Word, Excel, Notes
   * Open documents like playlists, lyrics, etc.
-* Other environment setup
-  * Switch to light or dark mode
+* Popup reminders for manual tasks 
 * Start Gig Performer with your Gig file
 * And most other tasks you need that can be run from the command line
-
 
 The implementation is intended to be resilient to errors. For example, if an external drive is missing, an audio device is not connected, or a web page is unreachable, then the script will offer you the option to continue or stop. (There are some limits to this that can be addressed in future versions.)
 
