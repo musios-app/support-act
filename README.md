@@ -60,6 +60,7 @@ Need to restore your computer when you're back home? Just create a similar scrip
 tell script "support-act"  
   setDarkMode()
   disableSiri()
+  hideDesktopWidgets()
   
   beep 1 -- get our attention
 
@@ -141,6 +142,18 @@ tell script "support-act"
   setDarkMode()
 end tell
 ```
+
+### `hideDesktopWidgets(); showDesktopWidgets()`
+
+Show or hide widgets on the MacOS desktop and Stage Manager (if present).
+
+```applescript
+tell script "support-act"
+  hideDesktopWidgets()
+  showDesktopWidgets()
+end tell
+```
+
 
 ### `disableSiri(); enableSiri()`
 

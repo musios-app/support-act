@@ -23,6 +23,24 @@ on setLightMode()
 end setLightMode
 
 
+-- Hide or show desktop widgets
+on hideDesktopWidgets()
+	set shellScript to "defaults write com.apple.WindowManager.plist StandardHideWidgets -bool true"
+	do shell script shellScript
+
+	set shellScript to "defaults write com.apple.WindowManager.plist StageManagerHideWidgets -bool true"
+	do shell script shellScript
+end hideDesktopWidgets
+
+on showDesktopWidgets()
+	set shellScript to "defaults write com.apple.WindowManager.plist StandardHideWidgets -bool false"
+	do shell script shellScript
+
+	set shellScript to "defaults write com.apple.WindowManager.plist StageManagerHideWidgets -bool false"
+	do shell script shellScript
+end showDesktopWidgets
+
+
 -- Enable or disable Siri
 on disableSiri()
 	set shellScript to "defaults write com.apple.assistant.support \"Assistant Enabled\" -bool false"
