@@ -187,7 +187,7 @@ on runTerminalCommand(cmd)
 end runTerminalCommand
 
 
-
+-- Popup that shows an instruction message to the user
 on showInstruction(theTitle, theMessage)
 	
 	display dialog theMessage Â
@@ -198,7 +198,7 @@ on showInstruction(theTitle, theMessage)
 	
 end showInstruction
 
-
+-- Popup that shows multi-step instructions to the user
 on showStepInstructions(theTitle, theSteps)
 	
 	set theMessage to ""
@@ -215,3 +215,21 @@ on showStepInstructions(theTitle, theSteps)
 		"Continue" cancel button "Stop"
 	
 end showStepInstructions
+
+
+-- Amphetamine is a free app that prevents your Mac from sleeping
+-- Install from app store: https://apps.apple.com/app/amphetamine/id937984704
+-- https://iffy.freshdesk.com/support/solutions/articles/48000078223-applescript-documentation
+
+on startAmphetamineSession(durationMinutes)
+	tell application "Amphetamine"
+		activate
+		delay 1
+		start new session with options {duration: durationMinutes, interval: minutes, displaySleepAllowed: false}
+	end tell	
+end stayAwake
+
+on endAmphetamineSession()
+	tell application "Amphetamine" to end session
+end stayAwake
+

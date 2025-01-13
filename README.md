@@ -60,8 +60,18 @@ tell script "support-act"
   setDarkMode()
   disableSiri()
   
+  beep 1 -- get our attention
+
+  -- When Support Act can't automate, popup user instructions
   showInstruction("Manual", "Enable Do Not Disturb mode")
 
+  set steps to { "Open a terminal", "Run \"sudo lsof | grep MusicSSD\" " }
+  showStepInstructions("Check usage of external drive", steps)
+
+  -- Keep the computer awake with the screen on for 90 minutes
+  startAmphetamineSession(90)
+
+  -- Setup the audio and config
   checkAudioDeviceConnected("FLOW8")
   setSoundDevice("input", "FLOW8")
   setSoundDevice("output", "FLOW8")
@@ -83,6 +93,7 @@ tell script "support-act"
   openDocument("/Users/musios/Documents/Gig Performer/Gig Files/practice.gig")
 end tell
 ```
+
 
 #### Notes on AppleScript syntax
 
@@ -130,6 +141,20 @@ NOTE: on Sequoia 15.2, the menu bar icon for Siri does not update when Siri is e
 ```applescript
 disableSiri()
 enableSiri()
+```
+
+
+### `startAmphetamineSession(); endAmphetamineSession()`
+
+[Amphetamine is a free app](https://apps.apple.com/app/amphetamine/id937984704) that prevents your Mac from sleeping and keeps the display on.
+
+The recommended way to use Amphetamine is to create a "trigger" that will stop the computer from sleeping and keep the display **any time** you have Gig Performer running.
+
+Support Act has a simple option to keep-alive for a number of minutes plus the corresponding end-session utility.
+
+```applescript
+startAmphetamineSession(90)
+endAmphetamineSession()
 ```
 
 
