@@ -90,7 +90,12 @@ tell script "support-act"
   openDocument("/Users/musios/Documents/Bome MIDI Translator/Presets/numa-x-piano73.bmtp")
   openWebPage("Google Chrome", "https://musescore.com/official_scores/scores/6937415")
   openDocument("/Users/musios/charts/Let me entertain you - Robbie Williams.pdf")
-  openDocument("/Users/musios/Documents/Gig Performer/Gig Files/practice.gig")
+
+  -- Finally, let's kick off Gig Performer with the user's choice of Gig files
+	set dir to "/Users/musios/Documents/Gig Performer/Gig Files"
+	set gigFiles to {"gig-friday.gig", "thrash-klezmer.gig", "folktronica.gig"}
+	set selected to chooseFile("Open which Gig file?" & return & dir & "...", gigFiles, dir)
+	openDocument(selected)
 end tell
 ```
 
@@ -105,8 +110,6 @@ AppleScript is written to be human-readable. You don't need programming experien
 1. Or... you can Copy the file in Finder then paste into the Script Editor window. The full path will be copied to the script.  You may need to remove the `\` backslash characters and/or add double quotes around the filename.
 1. Need a simple notification? Try `beep 1` or `beep 11` for 1 or many alerts.
 1. Put some text into the clipboard to save typing: `set the clipboard to "Example text"`.
-
-
 
 
 ## Install the Support Act script
