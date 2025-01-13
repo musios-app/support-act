@@ -18,6 +18,10 @@ NOTE:
 <li>Developed and tested on macOS Sequoia 15.2 with Applescript version 2.8</li>
 </div>
 
+* This will become a table of contents (this text will be scrapped).
+{:toc}
+
+
 
 ## Capabilities
 
@@ -132,9 +136,11 @@ Alternatively, to install manually:
 * Using Finder (or terminal), move the file from Downloads to the `Library/Script Libraries` in your home directory.
 
 
-## Utility functions
+## Environment Utilities
 
-### `setLightMode(); setDarkMode()`
+### `setLightMode()`
+
+### `setDarkMode()`
 
 Switch your desktop to light or dark mode.
 
@@ -145,7 +151,8 @@ tell script "support-act"
 end tell
 ```
 
-### `hideDesktopWidgets(); showDesktopWidgets()`
+### `showDesktopWidgets()`
+### `hideDesktopWidgets()`
 
 Show or hide widgets on the MacOS desktop and Stage Manager (if present).
 
@@ -157,7 +164,8 @@ end tell
 ```
 
 
-### `disableSiri(); enableSiri()`
+### `disableSiri()`
+### `enableSiri()`
 
 Siri and other Apple AI can compete for system resources. Disable Siri before a gig and re-enable afterwards (if you use Siri).
 
@@ -171,7 +179,8 @@ end tell
 ```
 
 
-### `startAmphetamineSession(); endAmphetamineSession()`
+### `startAmphetamineSession()`
+### `endAmphetamineSession()`
 
 [Amphetamine is a free app](https://apps.apple.com/app/amphetamine/id937984704) that prevents your Mac from sleeping and keeps the display on.
 
@@ -186,6 +195,8 @@ tell script "support-act"
 end tell
 ```
 
+
+## Audio Utilities
 
 ### `listConnectedAudioDevices()`
 
@@ -231,6 +242,8 @@ tell script "support-act"
   setVolume("alert", 50)
 end tell
 ```
+
+## Connectivity Utilities
 
 ### `checkNetAccess(<web address>)`
 
@@ -345,6 +358,8 @@ Or, open the MacOS System Information app and navigate to the "Bluetooth" sectio
 Or, open a terminal and run `system_profiler SPBluetoothDataType` 
 
 
+## Documents & Apps
+
 ### `openWebPage(<browser>, <web-address>)`
 
 Open a web page in your preferred browser, such as "Safari", "Google Chrome", "Arc", or "Firefox". Use the full name that appears in your Application list. 
@@ -399,8 +414,7 @@ end tell
 ```
 
 
-
-
+## Terminal & Command Utilities
 
 
 ### `runTerminalCommand(<command>)`
@@ -422,6 +436,7 @@ tell script "support-act"
 end tell
 ```
 
+## Other Utilities
 
 ### `showInstruction(theTitle, theMessage)`
 
