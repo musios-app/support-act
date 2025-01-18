@@ -20,39 +20,62 @@ NOTE:
 <li>Developed and tested on macOS Sequoia 15.2 with Applescript version 2.8</li>
 </div>
 
-* This will become a table of contents (this text will be scrapped).
-{:toc}
-
-
 
 ## Capabilities
 
 <div class="next-list-check"></div>
 
-* Set up your environment
-  * Audio devices for input, output and system alerts with volume
-  * Switch to light or dark mode
-  * Disable / enable Siri
-  * Disable / enable desktop widgets
-* Check connections:
-  * Internet connections and that specific sites are reachable
-  * External storage
-  * Audio devices
-  * MIDI devices
-  * USB devices
-  * Bluetooth devices
-* Open applications, files and web pages:
-  * Chart files, playlists, lyrics...
-  * MuseScore, Ultimate Guitar, lyrics
-  * BOME and other MIDI Utilities
-  * Web pages for lyrics, sheet music
-  * Documents such as Word, Excel, Notes
-  * Open documents like playlists, lyrics, etc.
-* Popup reminders for manual tasks 
-* Start Gig Performer with your Gig file
-* And most other tasks you need that can be run from the command line
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <b>Set up your environment</b>
+      <ul>
+        <li> Audio devices for input, output and system alerts with volume </li>
+        <li> Switch to light or dark mode </li>
+        <li> Disable / enable Siri </li>
+        <li> Disable / enable desktop widgets </li>
+      </ul>
+      <b>Misc tasks</b>
+      <ul>
+        <li> Popup reminders for manual tasks </li> 
+        <li> Start Gig Performer with your Gig file </li> 
+        <li> Run shell scripts </li> 
+      </ul>
+    </div>
+
+    <div class="col-4">
+      <b>Open applications, files and web pages:</b>
+      <ul>
+        <li> Chart files, playlists, lyrics... </li> 
+        <li> MuseScore, Ultimate Guitar, lyrics </li> 
+        <li> BOME and other MIDI Utilities </li> 
+        <li> Web pages for lyrics, sheet music </li> 
+        <li> Documents such as Word, Excel, Notes </li> 
+        <li> Open documents like playlists, lyrics, etc. </li> 
+      </ul> 
+    </div>
+    
+    <div class="col-4">
+      <b>Check connections:</b>
+      <ul>
+      <li> Internet connections and that specific sites are reachable </li> 
+      <li> External storage </li>
+      <li> Audio devices </li>
+      <li> MIDI devices </li>
+      <li> USB devices </li>
+      <li> Bluetooth devices </li>
+      </ul>
+    </div>
+  </div>
+</div>
 
 The implementation is intended to be resilient to errors. For example, if an external drive is missing, an audio device is not connected, or a web page is unreachable, then the script will offer you the option to continue or stop. (There are some limits to this that can be addressed in future versions.)
+
+## Utilities
+
+* This will become a table of contents (this text will be scrapped).
+{:toc}
+
 
 ## Example
 
