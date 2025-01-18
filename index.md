@@ -1,11 +1,13 @@
 ---
 layout: default
-title: Support Act
-description: AppleScript utilities to support your <a href="https://gigperformer.com/">Gig Performer</a> habit. Use it to check that your system is ready for the gig, then start up apps you need for your gig, and finally starts Gig Performer. It can do a long list of checks and actions that get your system ready for GP. Oh, you can also make another script to restore your settings after the gig too.
+title:  Support Act from musios.app
+description: Utility scripts to prep your system for a gig
 gitrepo: https://github.com/musios-app/support-act
 tags: gig-performer utility script
-image: assets/images/gig-performer-icon-512x512.jpg
+image: /projects/support-act/assets/images/og-support-act.svg
+icon: assets/images/gig-performer-icon-512x512.jpg
 ---
+
 
 # Support Act
 
