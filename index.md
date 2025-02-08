@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  Support Act from musios.app
+title: Support Act
 description: Utility scripts to prep your system for a gig
 gitrepo: https://github.com/musios-app/support-act
 tags: gig-performer utility script
